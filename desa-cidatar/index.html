@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber-Desa Cidatar // Sistem Informasi Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        // Menerapkan tema yang tersimpan
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'dark'; // Default ke dark
+            document.documentElement.className = savedTheme;
+        })();
+    </script>
+    <style>
+        /* ==================================================== */
+        /* == TEMA BARU: "CYBER-DESA" UNTUK DESA CIDATAR      == */
+        /* ==================================================== */
+        :root {
+            /* Variabel Warna Light Theme */
+            --bg-primary: #F0F4F8; /* Putih kebiruan */
+            --bg-secondary: #ffffff;
+            --text-primary: #0A192F; /* Biru Gelap */
+            --text-secondary: #4A5568;
+            --accent-primary: #0D9488; /* Teal Kuat */
+            --accent-secondary: #0F766E;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --border-color: #E2E8F0;
+            --header-bg: rgba(240, 244, 248, 0.8);
+            --hero-overlay: linear-gradient(to top, rgba(10, 25, 47, 0.7) 0%, rgba(10, 25, 47, 0) 60%);
+            --skeleton-bg: #e2e8f0;
+            --skeleton-highlight: #f1f5f9;
+        }
+
+        .dark {
+            /* Variabel Warna Dark Theme (Default) */
+            --bg-primary: #0A192F; /* Biru Navy Gelap */
+            --bg-secondary: #10213E;
+            --text-primary: #CCD6F6; /* Abu-abu terang */
+            --text-secondary: #8892B0;
+            --accent-primary: #64FFDA; /* Cyan Neon */
+            --accent-secondary: #00C7B1;
+            --card-bg: rgba(16, 33, 62, 0.75);
+            --border-color: #1A3052;
+            --header-bg: rgba(10, 25, 47, 0.85);
+            --hero-overlay: linear-gradient(to top, rgba(10, 25, 47, 1) 0%, rgba(10, 25, 47, 0) 60%);
+            --skeleton-bg: #10213E;
+            --skeleton-highlight: #1A3052;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* Menggunakan font monospace untuk seluruh halaman */
+        body, h1, h2, h3, h4, h5, .btn {
+            font-family: 'Fira Code', monospace;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section {
+            padding: 6rem 0;
+        }
+        
+        .section-alt {
+            background-color: var(--bg-secondary);
+        }
+        
+        /* Judul Section dengan gaya Command Line */
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .section-title h2 {
+            font-size: 2rem;
+            font-weight: 500;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title h2::before {
+            content: '>$ ';
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+        .section-title p {
+            color: var(--text-secondary);
+            max-width: 48rem;
+            margin: 1rem auto 0;
+            font-size: 1rem;
+        }
+
+        /* Desain Tombol (Button) Baru - Ghost Button */
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.75rem;
+            border-radius: 4px; /* Sudut tajam */
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            text-align: center;
+            background: transparent;
+            color: var(--accent-primary);
+            border: 1px solid var(--accent-primary);
+            transition: all 0.25s ease-out;
+        }
+        .btn:hover {
+            background-color: rgba(100, 255, 218, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(100, 255, 218, 0.1);
+        }
+        
+        /* Loading Screen */
+        .loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #0A192F; display: flex; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.5s ease, visibility 0.5s ease; }
+        .loading-screen.hidden { opacity: 0; visibility: hidden; }
+        .loading-spinner { width: 50px; height: 50px; border: 3px solid #1A3052; border-top-color: #64FFDA; border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Header */
+        header {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background-color: var(--header-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.25rem 0;
+            transition: top 0.3s ease-in-out;
+        }
+        .header-hidden {
+            top: -100px;
+        }
+
+        .navbar { display: flex; justify-content: space-between; align-items: center; }
+        .logo a { text-decoration: none; }
+        .logo-text { color: var(--text-primary); font-size: 1.25rem; font-weight: 600; }
+        .logo-text span { color: var(--accent-primary); }
+        .nav-menu { display: flex; list-style: none; gap: 2.25rem; }
+        .nav-menu li a { text-decoration: none; color: var(--text-secondary); font-weight: 500; position: relative; transition: color 0.3s ease; letter-spacing: 0.05em; }
+        .nav-menu li a:hover, .nav-menu li a.active { color: var(--accent-primary); }
+        .nav-actions { display: flex; align-items: center; gap: 1rem; }
+        .theme-toggle, .hamburger { background: none; border: none; cursor: pointer; color: var(--text-secondary); font-size: 1.5rem; transition: color 0.3s; }
+        .theme-toggle:hover, .hamburger:hover { color: var(--accent-primary); }
+        .hamburger { display: none; }
+
+        /* Hero Section */
+        .hero-section {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background-color: #0A192F; /* Fallback */
+        }
+        .hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover; background-position: center;
+            z-index: 1; opacity: 0.3;
+        }
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--hero-overlay); z-index: 2;
+        }
+        .hero-content {
+            position: relative; z-index: 3;
+            max-width: 55rem; padding: 0 1.5rem;
+        }
+        .hero-content h1 {
+            font-size: 3rem; font-weight: 600; line-height: 1.2;
+            margin-bottom: 1.5rem; color: var(--text-primary);
+        }
+        /* Glitch Animation */
+        .glitch { animation: glitch 1.5s linear infinite; }
+        @keyframes glitch { 2%,64%{transform: translate(2px,0) skew(0deg);} 4%,60%{transform: translate(-2px,0) skew(0deg);} 62%{transform: translate(0,0) skew(5deg);} }
+        .hero-content .accent { color: var(--accent-primary); }
+        .hero-content p { font-size: 1rem; margin-bottom: 2.5rem; color: var(--text-secondary); max-width: 40rem; }
+        .hero-buttons { display: flex; gap: 1rem; margin-top: 2rem; }
+
+        /* Card Styles */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .base-card {
+            background-color: var(--card-bg);
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(5px);
+        }
+        .base-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-primary);
+        }
+        
+        /* Aparatur Card */
+        .structure-card img { width: 100%; height: 320px; object-fit: cover; object-position: top; filter: grayscale(100%); transition: filter 0.3s ease; }
+        .structure-card:hover img { filter: grayscale(0%); }
+        .card-content { padding: 1.5rem; text-align: center; }
+        .card-content h3 { font-size: 1.2rem; color: var(--text-primary); margin-bottom: 0.25rem; }
+        .card-content p { color: var(--accent-primary); font-size: 0.9rem; font-weight: 500; }
+
+        /* Content Card (Berita, UMKM, etc) */
+        .content-card .content-img { width: 100%; height: 200px; object-fit: cover; }
+        .content-card .content-body { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .content-meta { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.8rem; margin-bottom: 1rem; }
+        .content-title { font-size: 1.1rem; color: var(--text-primary); margin-bottom: 1rem; flex-grow: 1; }
+        .content-footer { margin-top: auto; }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-secondary);
+            padding: 5rem 0 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem; }
+        .footer-column h3 { font-size: 1.2rem; margin-bottom: 1.5rem; color: var(--accent-primary); }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 0.5rem; }
+        .footer-links li::before { content: ">> "; color: var(--accent-primary); }
+        .footer-links a { text-decoration: none; color: var(--text-secondary); transition: color 0.3s; }
+        .footer-links a:hover { color: var(--accent-primary); }
+        .contact-info { display: flex; flex-direction: column; gap: 1rem; }
+        .contact-item { display: flex; gap: 1rem; align-items: start; color: var(--text-secondary); }
+        .contact-item i { color: var(--accent-primary); font-size: 1.1rem; min-width: 1.5rem; margin-top: 4px; }
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid var(--border-color); color: var(--text-secondary); font-size: 0.9rem; }
+        .copyright a { color: var(--accent-primary); text-decoration: none; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed; top: 0; right: -100%; width: 70%; max-width: 280px; height: 100vh;
+                background-color: var(--bg-secondary); flex-direction: column;
+                align-items: flex-start; padding: 6rem 2rem; gap: 1.5rem;
+                transition: right 0.4s ease-in-out;
+                box-shadow: -5px 0 20px rgba(0,0,0,0.2);
+            }
+            .nav-menu.active { right: 0; }
+            .hamburger { display: block; z-index: 1001; }
+            .hero-content h1 { font-size: 2.25rem; }
+        }
+
+        /* Skeleton loading */
+        .skeleton {
+            background-color: var(--skeleton-bg);
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skeleton::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 150%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--skeleton-highlight), transparent);
+            animation: skeletonLoading 1.8s infinite;
+        }
+
+        @keyframes skeletonLoading {
+            100% { left: 150%; }
+        }
+    </style>
+</head>
+<body class="dark">
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <header id="main-header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <a href="#home" style="text-decoration:none;">
+                        <h1 class="logo-text" id="village-name-header">Cidatar<span>.dev</span></h1>
+                    </a>
+                </div>
+                
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home" class="active">./home</a></li>
+                    <li><a href="#profil">./profil</a></li>
+                    <li><a href="#aparatur">./aparatur</a></li>
+                    <li><a href="#berita">./berita</a></li>
+                    <li><a href="#umkm">./umkm</a></li>
+                </ul>
+                
+                <div class="nav-actions">
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section" id="home">
+            <div class="hero-bg skeleton" id="heroBg"></div>
+            <div class="hero-overlay"></div>
+            
+            <div class="container">
+                <div class="hero-content">
+                    <h1 id="village-name-hero">
+                        Inisialisasi... <br>
+                        <span class="accent glitch">Cyber-Desa Cidatar</span>
+                    </h1>
+                    <p id="village-province">
+                        Sistem Informasi Digital Terintegrasi untuk Pelayanan Masyarakat, Transparansi Data, dan Pengembangan Potensi Desa berbasis Teknologi.
+                    </p>
+                    
+                    <div class="hero-buttons">
+                        <a href="#profil" class="btn">read_docs(profil)</a>
+                        <a href="#kontak" class="btn">contact(admin)</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="profil">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Profil Desa</h2>
+                    <p>Memuat data konfigurasi dan parameter Desa Cidatar...</p>
+                </div>
+                
+                <div class="card-grid">
+                    <div class="base-card">
+                         <div class="content-body">
+                             <h3 class="content-title" style="color: var(--accent-primary)">Visi Misi</h3>
+                             <p class="content-description" style="color: var(--text-secondary)">Terwujudnya Desa Cidatar yang inovatif, mandiri, dan berdaya saing global melalui transformasi digital di setiap sektor kehidupan masyarakat.</p>
+                         </div>
+                    </div>
+                     <div class="base-card">
+                         <div class="content-body">
+                             <h3 class="content-title" style="color: var(--accent-primary)">Sejarah Singkat</h3>
+                             <p class="content-description" style="color: var(--text-secondary)">Bermula dari pemukiman agraris, Desa Cidatar kini bertransformasi menjadi pusat inovasi digital pedesaan, mengintegrasikan tradisi dengan teknologi modern.</p>
+                         </div>
+                    </div>
+                     <div class="base-card">
+                         <div class="content-body">
+                             <h3 class="content-title" style="color: var(--accent-primary)">Data Geografis</h3>
+                             <p class="content-description" style="color: var(--text-secondary)">Terletak pada koordinat 7.32° LS, 107.75° BT. Area mencakup 350 Ha dengan topografi perbukitan yang dioptimalkan untuk pertanian cerdas.</p>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-alt" id="aparatur">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Aparatur Desa</h2>
+                    <p>Daftar user dengan hak akses administrasi sistem.</p>
+                </div>
+                
+                <div class="card-grid" id="organizational-structure">
+                    <div class="base-card structure-card skeleton" style="height: 420px;"></div>
+                    <div class="base-card structure-card skeleton" style="height: 420px;"></div>
+                    <div class="base-card structure-card skeleton" style="height: 420px;"></div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section" id="berita">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Berita Terkini</h2>
+                    <p>Log aktivitas dan pembaruan sistem terkini.</p>
+                </div>
+                
+                <div class="card-grid" id="news-container">
+                    <div class="base-card content-card skeleton" style="height: 400px;"></div>
+                    <div class="base-card content-card skeleton" style="height: 400px;"></div>
+                    <div class="base-card content-card skeleton" style="height: 400px;"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-alt" id="umkm">
+            <div class="container">
+                <div class="section-title">
+                    <h2>UMKM Digital</h2>
+                    <p>Produk dan layanan yang terintegrasi dalam ekosistem digital desa.</p>
+                </div>
+                
+                <div class="card-grid" id="umkm-container">
+                    <div class="base-card content-card skeleton" style="height: 420px;"></div>
+                    <div class="base-card content-card skeleton" style="height: 420px;"></div>
+                    <div class="base-card content-card skeleton" style="height: 420px;"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="kontak">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Cidatar.dev</h3>
+                    <p id="footer-description" style="color:var(--text-secondary);">Sistem Informasi Digital Desa Cidatar. Modul ini didistribusikan di bawah lisensi MIT. Source code tersedia atas permintaan.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Sitemap</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">home</a></li>
+                        <li><a href="#profil">profil</a></li>
+                        <li><a href="#aparatur">aparatur</a></li>
+                        <li><a href="#berita">berita</a></li>
+                        <li><a href="#umkm">umkm</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Kontak</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span id="footer-village-address">Server Location: Data sedang dimuat...</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span id="footer-village-email">admin@cidatar.dev</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; <span id="current-year"></span> <strong id="footer-copyright-name">Desa Cidatar</strong>. Runtime powered by <a href="https://lskk.co.id" target="_blank">LSKK</a>.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- KONFIGURASI ---
+            const API_BASE_URL = "https://api-kawal-desa.lskk.co.id";
+            const IMAGE_BASE_URL = "https://bucket-2.nos.wjv-1.neo.id/";
+            const LOADING_DURATION = 1500; // Durasi loading minimum dalam ms
+
+            const urlParams = new URLSearchParams(window.location.search);
+            // GUID untuk Desa Cidatar
+            const guid = urlParams.get('guid') || '05953047-92a8-486a-8488-ab93d7265893';
+
+            // --- ELEMEN DOM ---
+            const elements = {
+                loadingScreen: document.getElementById('loadingScreen'),
+                header: document.getElementById('main-header'),
+                headerName: document.getElementById('village-name-header'),
+                heroBg: document.getElementById('heroBg'),
+                heroName: document.getElementById('village-name-hero'),
+                province: document.getElementById('village-province'),
+                structureContainer: document.getElementById('organizational-structure'),
+                newsContainer: document.getElementById('news-container'),
+                umkmContainer: document.getElementById('umkm-container'),
+                footerAddress: document.getElementById('footer-village-address'),
+                footerEmail: document.getElementById('footer-village-email'),
+                footerCopyright: document.getElementById('footer-copyright-name'),
+                currentYear: document.getElementById('current-year'),
+                themeToggle: document.getElementById('themeToggle'),
+                hamburger: document.getElementById('hamburger'),
+                navMenu: document.getElementById('navMenu')
+            };
+
+            elements.currentYear.textContent = new Date().getFullYear();
+
+            // --- FUNGSI BANTU ---
+            const removeSkeleton = (el) => {
+                if (el) {
+                    el.classList.remove('skeleton');
+                    el.style.removeProperty('height');
+                    el.style.removeProperty('width');
+                }
+            };
+            
+            const fetchWithCache = async (endpoint) => {
+                const cacheKey = `desa-data-${endpoint}`;
+                const cachedData = sessionStorage.getItem(cacheKey);
+                if (cachedData) return JSON.parse(cachedData);
+
+                try {
+                    const response = await fetch(`${API_BASE_URL}${endpoint}`);
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    const data = await response.json();
+                    sessionStorage.setItem(cacheKey, JSON.stringify(data));
+                    return data;
+                } catch (error) {
+                    console.error("Could not fetch data:", error);
+                    return null;
+                }
+            };
+
+            // --- FUNGSI UI ---
+            function initThemeToggle() {
+                const savedTheme = localStorage.getItem('theme') || 'dark';
+                elements.themeToggle.innerHTML = savedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+                
+                elements.themeToggle.addEventListener('click', () => {
+                    const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+                    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                    document.documentElement.className = newTheme;
+                    localStorage.setItem('theme', newTheme);
+                    elements.themeToggle.innerHTML = newTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+                });
+            }
+
+            function initMobileMenu() {
+                elements.hamburger.addEventListener('click', () => {
+                    elements.navMenu.classList.toggle('active');
+                    elements.hamburger.innerHTML = elements.navMenu.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+                });
+                
+                document.querySelectorAll('.nav-menu a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        elements.navMenu.classList.remove('active');
+                        elements.hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+                    });
+                });
+            }
+            
+            function initScrollBehavior() {
+                let lastScrollTop = 0;
+                window.addEventListener("scroll", function() {
+                    let st = window.pageYOffset || document.documentElement.scrollTop;
+                    if (st > lastScrollTop && st > 100) {
+                        elements.header.classList.add('header-hidden');
+                    } else {
+                        elements.header.classList.remove('header-hidden');
+                    }
+                    lastScrollTop = st <= 0 ? 0 : st;
+                }, false);
+
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const targetId = this.getAttribute('href');
+                        const target = document.querySelector(targetId);
+                        if (target) {
+                            window.scrollTo({
+                                top: target.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                        }
+                    });
+                });
+            }
+            
+            // --- RENDER KONTEN ---
+            function createStructureCard(person) {
+                const defaultImage = 'https://placehold.co/400x400/10213E/64FFDA?text=AVATAR';
+                const imageUrl = person.file ? `${IMAGE_BASE_URL}${person.file}` : defaultImage;
+                
+                return `
+                    <div class="base-card structure-card">
+                        <img src="${imageUrl}" alt="${person.name || 'Nama'}" class="card-img" loading="lazy" onerror="this.src='${defaultImage}'">
+                        <div class="card-content">
+                            <h3>${person.name || 'Nama Tidak Tersedia'}</h3>
+                            <p>${person.position || 'Jabatan Tidak Tersedia'}</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function createContentCard(item, type) {
+                const defaultImage = 'https://placehold.co/600x400/10213E/64FFDA?text=NO_IMAGE';
+                const imageUrl = item.file ? `${IMAGE_BASE_URL}${item.file}` : defaultImage;
+                
+                let title = item.name || 'Judul Tidak Tersedia';
+                let date = item.createAt ? new Date(item.createAt).toLocaleDateString('en-CA') : 'N/A';
+
+                return `
+                    <div class="base-card content-card">
+                        <img src="${imageUrl}" alt="${title}" class="content-img" loading="lazy" onerror="this.src='${defaultImage}'">
+                        <div class="content-body">
+                            <div class="content-meta">
+                                <i class="far fa-calendar-alt"></i><span>${date}</span>
+                                &nbsp; <i class="fas fa-tag"></i><span>${type || 'info'}</span>
+                            </div>
+                            <h3 class="content-title"><a href="#" style="text-decoration:none; color: var(--text-primary);">${title}</a></h3>
+                            <div class="content-footer">
+                                <a href="#" class="btn">more_info()</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // --- PEMUATAN DATA ---
+            async function loadProfile() {
+                const data = await fetchWithCache(`/api/village/profile?guid=${guid}`);
+                if (!data || !data.vaillage) {
+                    console.error("Gagal memuat profil desa.");
+                    return;
+                }
+                
+                const village = data.vaillage;
+                const villageName = village.name || 'Cidatar';
+                
+                document.title = `Cyber-Desa ${villageName} // Sistem Informasi Digital`;
+                
+                elements.headerName.innerHTML = `${villageName}<span>.dev</span>`;
+                elements.heroName.innerHTML = `Inisialisasi... <br><span class="accent glitch">Cyber-Desa ${villageName}</span>`;
+                elements.province.textContent = village.description || 'Sistem Informasi Digital Terintegrasi untuk Pelayanan Masyarakat, Transparansi Data, dan Pengembangan Potensi Desa berbasis Teknologi.';
+                
+                if (village.banner) {
+                    elements.heroBg.style.backgroundImage = `url(${IMAGE_BASE_URL}${village.banner})`;
+                } else {
+                    elements.heroBg.style.backgroundImage = `url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=1770&auto=format&fit=crop')`;
+                }
+                removeSkeleton(elements.heroBg);
+                
+                if (village.organizationalStructure && village.organizationalStructure.length > 0) {
+                    elements.structureContainer.innerHTML = village.organizationalStructure.map(createStructureCard).join('');
+                } else {
+                    elements.structureContainer.innerHTML = '<p style="color:var(--text-secondary); text-align:center; grid-column: 1 / -1;">Data aparatur tidak ditemukan.</p>';
+                }
+                
+                elements.footerAddress.textContent = village.address || 'Server Location: Data tidak tersedia.';
+                elements.footerEmail.textContent = village.email || 'admin@cidatar.dev';
+                elements.footerCopyright.innerHTML = `&copy; ${new Date().getFullYear()} <strong>Desa ${villageName}</strong>. Runtime powered by <a href="https://lskk.co.id" target="_blank">LSKK</a>.`;
+            }
+
+            async function loadSection(type, container) {
+                const endpointMap = {
+                    'news': `/api/report/village?guid=${guid}&page=1&limit=3&type=news`,
+                    'umkm': `/api/umkm/village?guid=${guid}&page=1&limit=3`,
+                };
+                const data = await fetchWithCache(endpointMap[type]);
+                if (data && data.data && data.data.length > 0) {
+                    container.innerHTML = data.data.map(item => createContentCard(item, type)).join('');
+                } else {
+                    container.innerHTML = `<p style="color:var(--text-secondary); text-align:center; grid-column: 1 / -1;">Log ${type} tidak ditemukan.</p>`;
+                }
+            }
+            
+            // --- INISIALISASI ---
+            async function init() {
+                initThemeToggle();
+                initMobileMenu();
+                initScrollBehavior();
+                
+                const startTime = Date.now();
+                
+                await Promise.all([
+                    loadProfile(),
+                    loadSection('news', elements.newsContainer),
+                    loadSection('umkm', elements.umkmContainer),
+                ]);
+                
+                const elapsedTime = Date.now() - startTime;
+                const remainingTime = LOADING_DURATION - elapsedTime;
+                
+                setTimeout(() => {
+                    elements.loadingScreen.classList.add('hidden');
+                }, remainingTime > 0 ? remainingTime : 0);
+            }
+
+            init();
+        });
+    </script>
+</body>
+</html>
