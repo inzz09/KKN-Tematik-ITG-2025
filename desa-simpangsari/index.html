@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<lang="id" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Desa Padakembang - Kabupaten Tasikmalaya</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0077B6',
+            secondary: '#90E0EF',
+            accent: '#F9C74F',
+            baseLight: '#F0F8FF',
+            textDark: '#222222',
+            darkBg: '#102A43',
+            darkAccent: '#90E0EF'
+          },
+          fontFamily: {
+            inter: ['Inter', 'sans-serif'],
+            poppins: ['Poppins', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.className = savedTheme;
+    })();
+  </script>
+</head>
+<body class="font-inter bg-baseLight text-textDark dark:bg-darkBg dark:text-white">
+  <!-- Loading Screen -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loading-logo bg-secondary animate-pulse rounded-full w-16 h-16"></div>
+    <div class="loading-spinner border-4 border-accent border-t-transparent rounded-full w-8 h-8 animate-spin"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="bg-white dark:bg-dark shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav class="flex items-center justify-between h-16">
+        <!-- Logo -->
+        <div class="flex items-center space-x-3">
+          <img id="village-logo" src="https://placehold.co/50x50/e2e8f0/e2e8f0" alt="Logo Desa" class="w-10 h-10 object-cover rounded-full skeleton">
+          <span id="village-name-header" class="text-lg font-semibold text-primary skeleton">Nama Desa</span>
+        </div>
+  
+        <!-- Navigation Links -->
+        <ul id="navMenu" class="hidden md:flex space-x-6 items-center text-sm font-medium text-gray-700 dark:text-gray-200">
+          <li><a href="#home" class="hover:text-primary transition text-primary">Beranda</a></li>
+          <li><a href="#profil" class="hover:text-primary transition">Profil</a></li>
+          <li><a href="#aparatur" class="hover:text-primary transition">Aparatur</a></li>
+          <li><a href="#berita" class="hover:text-primary transition">Berita</a></li>
+          <li><a href="#umkm" class="hover:text-primary transition">UMKM</a></li>
+          <li><a href="#kegiatan" class="hover:text-primary transition">Kegiatan</a></li>
+        </ul>
+  
+        <!-- Actions (Theme toggle + Hamburger) -->
+        <div class="flex items-center space-x-4">
+          <button id="themeToggle" class="text-gray-600 dark:text-gray-300 hover:text-primary transition text-lg">
+            <i class="fas fa-moon"></i>
+          </button>
+  
+          <!-- Hamburger button -->
+          <button id="hamburger" class="text-gray-600 dark:text-gray-300 md:hidden text-xl focus:outline-none">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </nav>
+  
+      <!-- Mobile Menu -->
+      <div id="mobileMenu" class="md:hidden hidden mt-2 space-y-2 pb-4 text-sm font-medium text-gray-700 dark:text-gray-200">
+        <a href="#home" class="block px-4 py-2 hover:text-primary">Beranda</a>
+        <a href="#profil" class="block px-4 py-2 hover:text-primary">Profil</a>
+        <a href="#aparatur" class="block px-4 py-2 hover:text-primary">Aparatur</a>
+        <a href="#berita" class="block px-4 py-2 hover:text-primary">Berita</a>
+        <a href="#umkm" class="block px-4 py-2 hover:text-primary">UMKM</a>
+        <a href="#kegiatan" class="block px-4 py-2 hover:text-primary">Kegiatan</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <!-- Hero Section -->
+  <section id="home" class="relative h-[90vh] flex items-center justify-center text-center overflow-hidden bg-gray-100 dark:bg-gray-900">
+    <!-- Background Image -->
+    <div id="heroBg" class="absolute inset-0 bg-cover bg-center skeleton" style="background-image: url('https://placehold.co/1600x900');"></div>
+  
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-br from-primary/70 to-black/60 dark:from-primary/80 dark:to-black/80 z-10"></div>
+  
+    <!-- Content -->
+    <div class="relative z-20 max-w-3xl mx-auto px-4">
+      <h1 id="village-name-hero" class="text-4xl sm:text-5xl font-bold text-white drop-shadow-lg skeleton">
+        Selamat Datang di Desa Kami
+      </h1>
+      <p id="village-province" class="mt-4 text-lg sm:text-xl text-white/90 skeleton">
+        Provinsi & Kabupaten
+      </p>
+  
+      <div class="mt-8 flex justify-center gap-4 flex-wrap">
+        <a href="#profil" class="px-6 py-3 bg-primary text-white rounded-lg shadow hover:scale-105 transition transform duration-300">
+          Pelajari Lebih Lanjut
+        </a>
+        <a href="#kontak" class="px-6 py-3 bg-white text-primary rounded-lg shadow hover:bg-gray-100 transition">
+          Hubungi Kami
+        </a>
+      </div>
+    </div>
+  </section>
+  
+
+  <!-- profil -->
+  <section id="profil" class="py-16 bg-[#FAF9F6] text-[#2C2C2C] dark:bg-[#1D2B1F] dark:text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-semibold tracking-tight">Profil Desa</h2>
+        <p class="mt-2 text-base text-[#4F7942] dark:text-[#8BB174]">Temukan informasi lengkap tentang Desa Karamatwangi</p>
+      </div>
+  
+      <div class="grid md:grid-cols-2 gap-10 items-start">
+        <!-- Image Card -->
+        <div class="group rounded-xl overflow-hidden shadow-lg transition-all duration-500 ease-in-out transform hover:scale-[1.02] hover:shadow-2xl">
+          <img
+            id="office-image"
+            src="https://placehold.co/600x400/e2e8f0/e2e8f0?text=Kantor+Desa"
+            alt="Kantor Desa"
+            class="w-full h-full object-cover skeleton transition-transform duration-700 ease-in-out group-hover:scale-105"
+          />
+        </div>
+  
+        <!-- Info Card -->
+        <div class="transition-all duration-500 ease-in-out bg-white dark:bg-[#2C2C2C] rounded-xl p-6 shadow-lg hover:shadow-xl">
+          <h3 id="village-name-profile" class="text-2xl font-bold mb-2 skeleton">Nama Desa</h3>
+          <p id="village-address" class="mb-6 skeleton">Alamat lengkap desa akan ditampilkan di sini.</p>
+  
+          <div class="space-y-5">
+            <div class="flex items-start gap-4">
+              <i class="fas fa-map-marker-alt text-[#A3C585] dark:text-[#F0C808] mt-1"></i>
+              <div>
+                <strong>Kecamatan:</strong>
+                <span id="village-subdistrict" class="skeleton"></span>
+              </div>
+            </div>
+  
+            <div class="flex items-start gap-4">
+              <i class="fas fa-map text-[#A3C585] dark:text-[#F0C808] mt-1"></i>
+              <div>
+                <strong>Kabupaten:</strong>
+                <span id="village-district" class="skeleton"></span>
+              </div>
+            </div>
+  
+            <div class="flex items-start gap-4">
+              <i class="far fa-envelope text-[#A3C585] dark:text-[#F0C808] mt-1"></i>
+              <div>
+                <strong>Email:</strong>
+                <span id="village-email" class="skeleton"></span>
+              </div>
+            </div>
+  
+            <div class="flex items-start gap-4">
+              <i class="fas fa-globe text-[#A3C585] dark:text-[#F0C808] mt-1"></i>
+              <div>
+                <strong>Website:</strong>
+                <a id="village-url" href="#" target="_blank" class="underline text-[#4F7942] dark:text-[#8BB174] skeleton transition-colors duration-300 hover:text-[#F0C808] dark:hover:text-[#F0C808]"></a>
+              </div>
+            </div>
+          </div>
+  
+          <a
+            href="#"
+            class="inline-block mt-8 px-6 py-3 bg-[#4F7942] text-white rounded-md shadow-md hover:bg-[#A3C585] hover:text-[#2C2C2C] transition-all duration-300 ease-in-out"
+          >
+            Lihat Profil Lengkap
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- aparatur -->
+  <section id="aparatur" class="py-16 bg-[#A3C585] text-[#2C2C2C] dark:bg-[#1D2B1F] dark:text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-semibold tracking-tight">Aparatur Desa</h2>
+        <p class="mt-2 text-base text-[#4F7942] dark:text-[#8BB174]">Kenali struktur kepemimpinan Desa Padakembang</p>
+      </div>
+
+      <div id="organizational-structure" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Skeleton Loaders / Cards -->
+        <div class="bg-[#FAF9F6] dark:bg-[#2C2C2C] rounded-xl p-4 shadow-md animate-pulse skeleton transition-transform duration-300 ease-in-out hover:shadow-xl hover:scale-[1.02]" style="height: 400px;"></div>
+        <div class="bg-[#FAF9F6] dark:bg-[#2C2C2C] rounded-xl p-4 shadow-md animate-pulse skeleton transition-transform duration-300 ease-in-out hover:shadow-xl hover:scale-[1.02]" style="height: 400px;"></div>
+        <div class="bg-[#FAF9F6] dark:bg-[#2C2C2C] rounded-xl p-4 shadow-md animate-pulse skeleton transition-transform duration-300 ease-in-out hover:shadow-xl hover:scale-[1.02]" style="height: 400px;"></div>
+        <div class="bg-[#FAF9F6] dark:bg-[#2C2C2C] rounded-xl p-4 shadow-md animate-pulse skeleton transition-transform duration-300 ease-in-out hover:shadow-xl hover:scale-[1.02]" style="height: 400px;"></div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- berita -->
+  <section id="berita" class="py-16 bg-[#FAF9F6] text-[#2C2C2C] dark:bg-[#1D2B1F] dark:text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-semibold tracking-tight">Berita Terkini</h2>
+        <p class="mt-2 text-base text-[#4F7942] dark:text-[#8BB174]">
+          Informasi terbaru seputar Desa Padakembang
+        </p>
+      </div>
+  
+      <div id="news-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="rounded-xl bg-white dark:bg-[#2C2C2C] shadow-md p-4 h-[450px] animate-pulse skeleton"></div>
+        <div class="rounded-xl bg-white dark:bg-[#2C2C2C] shadow-md p-4 h-[450px] animate-pulse skeleton"></div>
+        <div class="rounded-xl bg-white dark:bg-[#2C2C2C] shadow-md p-4 h-[450px] animate-pulse skeleton"></div>
+      </div>
+    </div>
+  </section>
+  
+
+  <!-- umkm -->
+  <section id="umkm" class="py-16 bg-[#A3B18A] text-[#1C1C1C] dark:bg-[#2A2A2A] dark:text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-semibold tracking-tight">Produk Unggulan UMKM</h2>
+        <p class="mt-2 text-base text-[#7A5230] dark:text-[#FFD166]">
+          Dukung ekonomi lokal dengan produk-produk terbaik desa kami
+        </p>
+      </div>
+  
+      <div id="umkm-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="rounded-xl bg-white dark:bg-[#2C2C2C] shadow-md p-4 h-[450px] animate-pulse skeleton"></div>
+        <div class="rounded-xl bg-white dark:bg-[#2C2C2C] shadow-md p-4 h-[450px] animate-pulse skeleton"></div>
+        <div class="rounded-xl bg-white dark:bg-[#2C2C2C] shadow-md p-4 h-[450px] animate-pulse skeleton"></div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- kegiatan -->
+  <section id="kegiatan" class="py-16 bg-[#FAF9F6] text-[#2c2c2c] dark:bg-[#1D2B1F] dark:text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-semibold tracking-tight">Kegiatan Desa</h2>
+        <p class="mt-2 text-base text-[#7A5230] dark:text-[#FFD166]">
+          Lihat kegiatan terbaru yang dilaksanakan di Desa Padakembang
+        </p>
+      </div>
+  
+      <div id="activity-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="rounded-xl bg-white dark:bg-[#2C2C2C] shadow-md p-4 h-[450px] animate-pulse skeleton"></div>
+        <div class="rounded-xl bg-white dark:bg-[#2C2C2C] shadow-md p-4 h-[450px] animate-pulse skeleton"></div>
+        <div class="rounded-xl bg-white dark:bg-[#2C2C2C] shadow-md p-4 h-[450px] animate-pulse skeleton"></div>
+      </div>      
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer id="kontak" class="bg-[#A3C585] dark:bg-[#8BB174] text-[#2C2C2C] dark:text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+        
+        <!-- Kolom Tautan Cepat -->
+        <div>
+          <h3 class="text-xl font-semibold mb-4">Tautan Cepat</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#home" class="hover:text-[#4F7942] dark:hover:text-[#F0C808] transition"><i class="fas fa-home mr-2"></i> Beranda</a></li>
+            <li><a href="#profil" class="hover:text-[#4F7942] dark:hover:text-[#F0C808] transition"><i class="fas fa-info-circle mr-2"></i> Profil Desa</a></li>
+            <li><a href="#aparatur" class="hover:text-[#4F7942] dark:hover:text-[#F0C808] transition"><i class="fas fa-users mr-2"></i> Aparatur</a></li>
+            <li><a href="#berita" class="hover:text-[#4F7942] dark:hover:text-[#F0C808] transition"><i class="fas fa-newspaper mr-2"></i> Berita</a></li>
+            <li><a href="#umkm" class="hover:text-[#4F7942] dark:hover:text-[#F0C808] transition"><i class="fas fa-store mr-2"></i> UMKM</a></li>
+            <li><a href="#kegiatan" class="hover:text-[#4F7942] dark:hover:text-[#F0C808] transition"><i class="fas fa-calendar-alt mr-2"></i> Kegiatan</a></li>
+          </ul>
+        </div>
+  
+        <!-- Kolom Kontak -->
+        <div>
+          <h3 class="text-xl font-semibold mb-4">Kontak Kami</h3>
+          <div class="space-y-4 text-sm">
+            <div class="flex items-start gap-3">
+              <i class="fas fa-map-marker-alt mt-1 text-lg text-[#4F7942] dark:text-[#F0C808]"></i>
+              <span id="footer-village-address" class="leading-snug">
+                Jalan Sayuran Depan Vulkanologi, Desa Padakembang, Kec. Padakembang, Kab. Tasikmalaya, Jawa Barat
+              </span>
+            </div>
+            <div class="flex items-center gap-3">
+              <i class="fas fa-phone text-lg text-[#4F7942] dark:text-[#F0C808]"></i>
+              <span>+62 812 3456 7890</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <i class="fas fa-envelope text-lg text-[#4F7942] dark:text-[#F0C808]"></i>
+              <span id="footer-village-email">padakembang@desa.id</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <i class="fas fa-globe text-lg text-[#4F7942] dark:text-[#F0C808]"></i>
+              <span id="footer-village-url">https://desa-padakembang.lskk.co.id/</span>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Copyright -->
+      <div class="mt-12 text-center text-sm border-t border-white/20 pt-6">
+        <p>&copy; <span id="current-year"></span> <span id="footer-copyright-name">Desa Padakembang</span>. Hak Cipta Dilindungi.</p>
+      </div>
+    </div>
+  </footer>
+  
+
+    <!-- Back to Top Button -->
+    <button
+      id="backToTop"
+      class="fixed bottom-6 right-6 bg-primary text-white p-3 rounded-full shadow-lg hover:bg-accent transition hidden"
+    >
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+          // --- CONFIGURATION ---
+          const API_BASE_URL = "https://api-kawal-desa.lskk.co.id";
+          const IMAGE_BASE_URL = "https://bucket-2.nos.wjv-1.neo.id/";
+          const LOADING_DURATION = 2000; // Minimum loading time in ms
+
+          // Get GUID from URL parameters, or use a default
+          const urlParams = new URLSearchParams(window.location.search);
+          const guid = urlParams.get('guid') || '9b6ae263-597e-4a59-9ae0-f4cf42a3fb2e';
+
+          // --- DOM ELEMENTS ---
+          const elements = {
+              loadingScreen: document.getElementById('loadingScreen'),
+              logo: document.getElementById('village-logo'),
+              headerName: document.getElementById('village-name-header'),
+              heroBg: document.getElementById('heroBg'),
+              heroName: document.getElementById('village-name-hero'),
+              province: document.getElementById('village-province'),
+              officeImage: document.getElementById('office-image'),
+              profileName: document.getElementById('village-name-profile'),
+              address: document.getElementById('village-address'),
+              subdistrict: document.getElementById('village-subdistrict'),
+              district: document.getElementById('village-district'),
+              email: document.getElementById('village-email'),
+              url: document.getElementById('village-url'),
+              structureContainer: document.getElementById('organizational-structure'),
+              newsContainer: document.getElementById('news-container'),
+              umkmContainer: document.getElementById('umkm-container'),
+              activityContainer: document.getElementById('activity-container'),
+              footerAddress: document.getElementById('footer-village-address'),
+              footerEmail: document.getElementById('footer-village-email'),
+              footerUrl: document.getElementById('footer-village-url'),
+              footerCopyright: document.getElementById('footer-copyright-name'),
+              currentYear: document.getElementById('current-year'),
+              themeToggle: document.getElementById('themeToggle'),
+              hamburger: document.getElementById('hamburger'),
+              navMenu: document.getElementById('navMenu')
+          };
+
+          // Set current year
+          elements.currentYear.textContent = new Date().getFullYear();
+
+          // --- THEME TOGGLE ---
+          function initThemeToggle() {
+              const savedTheme = localStorage.getItem('theme') || 'light';
+              const isDark = savedTheme === 'dark';
+              
+              // Update icon based on theme
+              elements.themeToggle.innerHTML = isDark ? 
+                  '<i class="fas fa-sun"></i>' : 
+                  '<i class="fas fa-moon"></i>';
+              
+              // Toggle theme function
+              elements.themeToggle.addEventListener('click', () => {
+                  const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+                  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                  
+                  // Update class and localStorage
+                  document.documentElement.className = newTheme;
+                  localStorage.setItem('theme', newTheme);
+                  
+                  // Update icon
+                  elements.themeToggle.innerHTML = newTheme === 'dark' ? 
+                      '<i class="fas fa-sun"></i>' : 
+                      '<i class="fas fa-moon"></i>';
+              });
+          }
+
+          // --- MOBILE MENU ---
+          function initMobileMenu() {
+              elements.hamburger.addEventListener('click', () => {
+                  elements.navMenu.classList.toggle('active');
+                  elements.hamburger.innerHTML = elements.navMenu.classList.contains('active') ?
+                      '<i class="fas fa-times"></i>' :
+                      '<i class="fas fa-bars"></i>';
+              });
+              
+              // Close menu when clicking on links
+              document.querySelectorAll('.nav-menu a').forEach(link => {
+                  link.addEventListener('click', () => {
+                      elements.navMenu.classList.remove('active');
+                      elements.hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+                  });
+              });
+          }
+
+          // --- HELPER FUNCTIONS ---
+
+          // Function to fetch data from API
+          async function fetchData(endpoint) {
+              try {
+                  const response = await fetch(`${API_BASE_URL}${endpoint}`);
+                  if (!response.ok) {
+                      throw new Error(`HTTP error! status: ${response.status}`);
+                  }
+                  return await response.json();
+              } catch (error) {
+                  console.error("Could not fetch data:", error);
+                  return null;
+              }
+          }
+          
+          // Function to remove skeleton class
+          function removeSkeleton(element) {
+              if (element) {
+                  element.classList.remove('skeleton');
+                  element.style.removeProperty('height');
+              }
+          }
+
+          // Function to create a card for news, umkm, or activities
+          function createCard(item, type) {
+            const defaultImage = 'https://placehold.co/600x400/e2e8f0/cccccc?text=Gambar';
+            const imageUrl = item.file ? `${IMAGE_BASE_URL}${item.file}` : defaultImage;
+
+            const title = item.name || 'Judul Tidak Tersedia';
+            let description = item.description || 'Deskripsi tidak tersedia.';
+            
+            // Truncate deskripsi jika panjang
+            if (description.length > 120) {
+              description = description.substring(0, 120) + '...';
+            }
+
+            // Format tanggal jika tersedia
+            let date = '';
+            if (item.createAt) {
+              const dateObj = new Date(item.createAt);
+              date = dateObj.toLocaleDateString('id-ID', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              });
+            }
+
+            // Buat elemen card
+            const card = document.createElement('div');
+            card.className = `
+              bg-[#FAF9F6] dark:bg-[#2C2C2C] rounded-xl overflow-hidden shadow-md
+              hover:shadow-xl transition-all duration-300 ease-in-out
+              flex flex-col
+            `;
+
+            card.innerHTML = `
+              <img src="${imageUrl}" alt="${title}" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='${defaultImage}';">
+              <div class="p-4 flex flex-col justify-between flex-grow">
+                <div class="mb-2">
+                  <div class="text-sm text-[#4F7942] dark:text-[#8BB174] flex items-center gap-1 mb-1">
+                    <i class="far fa-calendar"></i>
+                    <span>${date}</span>
+                  </div>
+                  <h3 class="text-lg font-semibold text-[#2C2C2C] dark:text-white mb-1">${title}</h3>
+                  <p class="text-sm text-[#2C2C2C] dark:text-gray-300">${description}</p>
+                </div>
+                <div class="mt-auto">
+                  <a href="#" class="inline-block mt-4 px-4 py-2 bg-[#4F7942] text-white text-sm rounded hover:bg-[#A3C585] transition duration-300">Lihat Detail</a>
+                </div>
+              </div>
+            `;
+
+            return card;
+          }
+
+
+          // Function to create a card for organizational structure
+          function createStructureCard(person) {
+            const defaultImage = 'https://placehold.co/400x400/e2e8f0/cccccc?text=Foto';
+            const imageUrl = person.file ? `${IMAGE_BASE_URL}${person.file}` : defaultImage;
+
+            const card = document.createElement('div');
+            card.className =
+              'bg-[#FAF9F6] dark:bg-[#2C2C2C] rounded-xl p-4 shadow-md transition-transform duration-300 ease-in-out hover:shadow-xl hover:scale-[1.02]';
+
+            card.innerHTML = `
+              <img src="${imageUrl}" alt="${person.name}" class="w-full h-56 object-cover rounded-md mb-4" onerror="this.onerror=null;this.src='${defaultImage}'" />
+              <div class="text-center">
+                <h3 class="text-lg font-semibold text-[#2C2C2C] dark:text-white">${person.name || 'Nama Tidak Tersedia'}</h3>
+                <p class="text-sm text-[#4F7942] dark:text-[#8BB174]">${person.position || 'Jabatan Tidak Tersedia'}</p>
+              </div>
+            `;
+            return card;
+          }
+
+          // --- DATA FETCHING AND RENDERING ---
+
+          // Fetch and display Village Profile
+          async function loadProfile() {
+              const data = await fetchData(`/api/village/profile?guid=${guid}`);
+              if (data && data.vaillage) {
+                  const village = data.vaillage;
+                  
+                  // Set page title
+                  document.title = `Desa ${village.name || 'Digital'}`;
+                  
+                  // Set logo
+                  if (village.logo) {
+                      elements.logo.src = `${IMAGE_BASE_URL}${village.logo}`;
+                      elements.logo.onerror = () => { 
+                          elements.logo.src = 'https://placehold.co/50x50/cccccc/ffffff?text=D'; 
+                      };
+                      removeSkeleton(elements.logo);
+                  }
+                  
+                  // Set header name
+                  elements.headerName.textContent = `Desa ${village.name}`;
+                  removeSkeleton(elements.headerName);
+                  
+                  // Set hero background
+                  if (village.banner) {
+                      elements.heroBg.style.backgroundImage = `url(${IMAGE_BASE_URL}${village.banner})`;
+                      removeSkeleton(elements.heroBg);
+                  }
+                  
+                  // Set hero text
+                  elements.heroName.textContent = `Selamat Datang di Desa ${village.name}`;
+                  elements.province.textContent = `${village.province}, ${village.district}`;
+                  removeSkeleton(elements.heroName);
+                  removeSkeleton(elements.province);
+                  
+                  // Set office image
+                  if (village.office) {
+                      elements.officeImage.src = `${IMAGE_BASE_URL}${village.office}`;
+                      elements.officeImage.onerror = () => { 
+                          elements.officeImage.src = 'https://placehold.co/600x400/e2e8f0/cccccc?text=Kantor+Desa'; 
+                      };
+                      removeSkeleton(elements.officeImage);
+                  }
+                  
+                  // Set profile info
+                  elements.profileName.textContent = `Desa ${village.name}`;
+                  elements.address.textContent = village.address || 'Alamat tidak tersedia.';
+                  elements.subdistrict.textContent = village.subdistrict || '-';
+                  elements.district.textContent = village.district || '-';
+                  elements.email.textContent = village.email || '-';
+                  elements.url.textContent = village.url || 'Tidak tersedia';
+                  elements.url.href = village.url || '#';
+                  
+                  // Remove skeletons from profile info
+                  removeSkeleton(elements.profileName);
+                  removeSkeleton(elements.address);
+                  removeSkeleton(elements.subdistrict);
+                  removeSkeleton(elements.district);
+                  removeSkeleton(elements.email);
+                  removeSkeleton(elements.url);
+
+                  // Footer
+                  elements.footerAddress.textContent = village.address || '-';
+                  elements.footerEmail.textContent = village.email || '-';
+                  elements.footerUrl.textContent = village.url || '-';
+                  elements.footerCopyright.textContent = `Desa ${village.name}`;
+
+                  // Display organizational structure
+                  if (village.organizationalStructure && village.organizationalStructure.length > 0) {
+                      elements.structureContainer.innerHTML = '';
+                      village.organizationalStructure.forEach(person => {
+                          elements.structureContainer.appendChild(createStructureCard(person));
+                      });
+                  } else {
+                      elements.structureContainer.innerHTML = '<p class="text-center text-gray-500 col-span-full">Data aparatur desa tidak tersedia.</p>';
+                  }
+              } else {
+                  elements.structureContainer.innerHTML = '<p class="text-center text-gray-500 col-span-full">Gagal memuat data profil desa. Periksa kembali `guid` atau koneksi API.</p>';
+                  console.error("Failed to load profile data or `vaillage` property not found in response:", data);
+              }
+          }
+
+          // Fetch and display News, UMKM, or Activities
+          async function loadSection(type, containerId) {
+            const API_BASE_URL = "https://api-kawal-desa.lskk.co.id";
+            const IMAGE_BASE_URL = "https://bucket-2.nos.wjv-1.neo.id/";
+            const guid = new URLSearchParams(window.location.search).get('guid') || '9b6ae263-597e-4a59-9ae0-f4cf42a3fb2e';
+
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            const endpointMap = {
+              news: `/api/report/village?guid=${guid}&page=1&limit=3&type=news`,
+              umkm: `/api/umkm/village?guid=${guid}&page=1&limit=3`,
+              activity: `/api/report/village?guid=${guid}&page=1&limit=3&type=activity`
+            };
+
+            const defaultImage = 'https://placehold.co/600x400/e2e8f0/cccccc?text=Gambar';
+
+            try {
+              const res = await fetch(API_BASE_URL + endpointMap[type]);
+              const data = await res.json();
+
+              if (!data || !data.data || data.data.length === 0) {
+                container.innerHTML = `<p class="text-center text-gray-500 col-span-full">Tidak ada data ${type} saat ini.</p>`;
+                return;
+              }
+
+              container.innerHTML = '';
+
+              data.data.forEach(item => {
+                const imageUrl = item.file ? `${IMAGE_BASE_URL}${item.file}` : defaultImage;
+                const title = item.name || 'Judul Tidak Tersedia';
+                const date = item.createAt
+                  ? new Date(item.createAt).toLocaleDateString('id-ID', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })
+                  : '';
+                let description = item.description || 'Deskripsi tidak tersedia.';
+                if (description.length > 120) description = description.slice(0, 120) + '...';
+
+                const card = document.createElement('div');
+                card.className = `rounded-xl bg-white dark:bg-[#2C2C2C] shadow-md p-4 h-[450px] transition duration-300 ease-in-out hover:shadow-xl hover:scale-[1.02]`;
+                card.innerHTML = `
+                  <img src="${imageUrl}" alt="${title}" class="w-full h-48 object-cover rounded-md mb-4" onerror="this.onerror=null;this.src='${defaultImage}'">
+                  <p class="text-sm text-gray-500 dark:text-gray-400 mb-1"><i class="far fa-calendar mr-1"></i>${date}</p>
+                  <h3 class="text-lg font-semibold text-[#4F7942] dark:text-[#F0C808] mb-2">${title}</h3>
+                  <p class="text-sm text-[#2C2C2C] dark:text-gray-300 mb-3">${description}</p>
+                  <a href="#" class="text-sm font-medium text-[#4F7942] dark:text-[#F0C808] hover:underline">Lihat Detail</a>
+                `;
+                container.appendChild(card);
+              });
+            } catch (err) {
+              container.innerHTML = `<p class="text-center text-red-500">Gagal memuat data ${type}.</p>`;
+              console.error(err);
+            }
+          }
+
+          
+          // --- INITIALIZATION ---
+          async function init() {
+              // Initialize theme toggle and mobile menu
+              initThemeToggle();
+              initMobileMenu();
+              
+              // Load data
+              await Promise.all([
+                  loadProfile(),
+                  loadSection('news', 'news-container'),
+                  loadSection('umkm', 'umkm-container'),
+                  loadSection('activity', 'activity-container')
+              ]);
+              
+              // Smooth scrolling for anchor links
+              document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                  anchor.addEventListener('click', function(e) {
+                      e.preventDefault();
+                      
+                      const targetId = this.getAttribute('href');
+                      const target = document.querySelector(targetId);
+                      if (target) {
+                          window.scrollTo({
+                              top: target.offsetTop - 80,
+                              behavior: 'smooth'
+                          });
+                      }
+                  });
+              });
+              
+              // Hide loading screen after minimum duration
+              setTimeout(() => {
+                  elements.loadingScreen.classList.add('hidden');
+              }, LOADING_DURATION);
+          }
+
+          init();
+      });
+    </script>
+  </body>
+</html>
+
+
+

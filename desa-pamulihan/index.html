@@ -1,77 +1,63 @@
 <!DOCTYPE html>
 <html lang="id" class="light">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desa Sukawargi - Kabupaten Tasikmalaya</title>
-
+    <title>Desa Pamulihan - Kabupaten Garut</title>
+    
     <!-- Google Fonts: Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
+    
     <script>
         // Menerapkan tema yang tersimpan untuk mencegah FOUC
-        (function () {
+        (function() {
             const savedTheme = localStorage.getItem('theme') || 'light';
             document.documentElement.className = savedTheme;
         })();
     </script>
-
+    
     <style>
         :root {
-            --bg-primary: #F8FAFC;
-            /* Slate-50 */
+            /* Tema Terang (Warm & Rustic) */
+            --bg-primary: #FFFBF5;
             --bg-secondary: #FFFFFF;
-            --text-primary: #1E293B;
-            /* Slate-800 */
-            --text-secondary: #64748B;
-            /* Slate-500 */
-            --accent-primary: #3B82F6;
-            /* Blue-500 */
-            --accent-secondary: #2563EB;
-            /* Blue-600 */
+            --text-primary: #44403C; /* Stone 700 */
+            --text-secondary: #78716C; /* Stone 500 */
+            --accent-primary: #089817; /* green */
+            --accent-secondary: #17cb29; /* green */
             --card-bg: #FFFFFF;
-            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-            --card-hover-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
-            --header-bg: rgba(248, 250, 252, 0.85);
-            --hero-overlay: rgba(0, 0, 0, 0.25);
-            --skeleton-bg: #E2E8F0;
-            /* Slate-200 */
-            --skeleton-highlight: #CBD5E1;
-            /* Slate-300 */
-            --border-color: #E2E8F0;
+            --card-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+            --card-hover-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            --header-bg: rgba(255, 251, 245, 0.85);
+            --hero-overlay: rgba(0, 0, 0, 0.3);
+            --skeleton-bg: #F5F5F4; /* Stone 100 */
+            --skeleton-highlight: #E7E5E4; /* Stone 200 */
+            --border-color: #E7E5E4;
             --btn-primary-bg: var(--accent-primary);
             --btn-primary-hover-bg: var(--accent-secondary);
         }
 
         .dark {
-            --bg-primary: #0F172A;
-            /* Slate-900 */
-            --bg-secondary: #1E293B;
-            /* Slate-800 */
-            --text-primary: #F8FAFC;
-            /* Slate-50 */
-            --text-secondary: #94A3B8;
-            /* Slate-400 */
-            --accent-primary: #60A5FA;
-            /* Blue-400 */
-            --accent-secondary: #3B82F6;
-            /* Blue-500 */
-            --card-bg: #334155;
-            /* Slate-700 */
-            --card-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
-            --card-hover-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-            --header-bg: rgba(15, 23, 42, 0.9);
+            /* Tema Gelap (Warm & Rustic) */
+            --bg-primary: #292524; /* Stone 800 */
+            --bg-secondary: #1C1917; /* Stone 900 */
+            --text-primary: #F5F5F4; /* Stone 100 */
+            --text-secondary: #A8A29E; /* Stone 400 */
+            --accent-primary: #17cb29; /* green */
+            --accent-secondary: #089817; /* green */
+            --card-bg: #44403C; /* Stone 700 */
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --card-hover-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            --header-bg: rgba(41, 37, 36, 0.85);
             --hero-overlay: rgba(0, 0, 0, 0.5);
-            --skeleton-bg: #334155;
-            --skeleton-highlight: #475569;
-            --border-color: #475569;
+            --skeleton-bg: #44403C;
+            --skeleton-highlight: #57534E;
+            --border-color: #57534E; /* Stone 600 */
             --btn-primary-bg: var(--accent-primary);
             --btn-primary-hover-bg: var(--accent-secondary);
         }
@@ -90,12 +76,7 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
+        h1, h2, h3, h4, h5, h6 {
             font-weight: 700;
             color: var(--text-primary);
         }
@@ -122,7 +103,7 @@
             position: relative;
             font-weight: 800;
         }
-
+        
         .section-title h2::after {
             content: '';
             position: absolute;
@@ -180,45 +161,19 @@
 
         /* Loading Screen */
         .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: var(--bg-primary);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            display: flex; justify-content: center; align-items: center;
             z-index: 9999;
             transition: opacity 0.7s ease, visibility 0.7s ease;
         }
-
-        .loading-screen.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .loading-spinner {
-            width: 60px;
-            height: 60px;
-            border: 5px solid var(--border-color);
-            border-top-color: var(--accent-primary);
-            border-radius: 50%;
-            animation: spin 1.2s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
+        .loading-screen.hidden { opacity: 0; visibility: hidden; }
+        .loading-spinner { width: 60px; height: 60px; border: 5px solid var(--border-color); border-top-color: var(--accent-primary); border-radius: 50%; animation: spin 1.2s ease-in-out infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
         /* Header */
         header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
+            position: fixed; top: 0; width: 100%; z-index: 1000;
             background-color: var(--header-bg);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -226,604 +181,137 @@
             padding: 1rem 0;
             transition: top 0.3s ease-in-out;
         }
+        .header-hidden { top: -100px; }
 
-        .header-hidden {
-            top: -100px;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            text-decoration: none;
-        }
-
-        .logo img {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--bg-accent);
-        }
-
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--text-primary);
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 2.5rem;
-        }
-
-        .nav-menu li a {
-            text-decoration: none;
-            color: var(--text-secondary);
-            font-weight: 600;
-            position: relative;
-            transition: color 0.3s ease;
-            padding-bottom: 5px;
-        }
-
-        .nav-menu li a:hover,
-        .nav-menu li a.active {
-            color: var(--accent-primary);
-        }
-
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .theme-toggle {
-            background: var(--bg-secondary);
-            border: none;
-            cursor: pointer;
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .theme-toggle:hover {
-            background-color: var(--accent-primary);
-            color: white;
-        }
-
-        .hamburger {
-            display: none;
-            z-index: 1001;
-        }
+        .navbar { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 2px solid var(--bg-accent); }
+        .logo-text { font-size: 1.5rem; font-weight: 800; color: var(--text-primary); }
+        .nav-menu { display: flex; list-style: none; gap: 2.5rem; }
+        .nav-menu li a { text-decoration: none; color: var(--text-secondary); font-weight: 600; position: relative; transition: color 0.3s ease; padding-bottom: 5px; }
+        .nav-menu li a:hover, .nav-menu li a.active { color: var(--accent-primary); }
+        .nav-actions { display: flex; align-items: center; gap: 0.5rem; }
+        .theme-toggle { background: var(--bg-secondary); border: none; cursor: pointer; color: var(--text-secondary); font-size: 1.1rem; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
+        .theme-toggle:hover { background-color: var(--accent-primary); color: white; }
+        .hamburger { display: none; z-index: 1001; }
 
         /* Hero Section - Split Layout */
         .hero-section {
-            padding-top: 80px;
-            /* Header height */
+            padding-top: 80px; /* Header height */
             min-height: 100vh;
             display: flex;
             align-items: center;
         }
-
         .hero-grid {
             display: grid;
             grid-template-columns: 1fr 1.2fr;
             align-items: center;
             gap: 4rem;
         }
-
-        .hero-content {
-            animation: fadeUp 1.2s ease-out 0.5s backwards;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            line-height: 1.2;
-            margin-bottom: 1.5rem;
-            font-weight: 800;
-        }
-
-        .hero-content .accent {
-            color: var(--accent-primary);
-        }
-
-        .hero-content p {
-            font-size: 1.1rem;
-            margin-bottom: 2.5rem;
-            color: var(--text-secondary);
-            font-weight: 400;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1.5rem;
-        }
-
+        .hero-content { animation: fadeUp 1.2s ease-out 0.5s backwards; }
+        .hero-content h1 { font-size: 3.5rem; line-height: 1.2; margin-bottom: 1.5rem; font-weight: 800; }
+        .hero-content .accent { color: var(--accent-primary); }
+        .hero-content p { font-size: 1.1rem; margin-bottom: 2.5rem; color: var(--text-secondary); font-weight: 400; }
+        .hero-buttons { display: flex; gap: 1.5rem; }
         .hero-image-container {
             border-radius: 1rem;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             height: 60vh;
             min-height: 400px;
         }
-
-        .hero-bg {
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            transition: transform 0.5s ease;
-        }
-
-        .hero-image-container:hover .hero-bg {
-            transform: scale(1.05);
-        }
-
-        /* Hero Section Enhancements */
-        .hero-title {
-            min-height: 120px;
-            border-radius: 1rem;
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 1.2rem;
-            color: var(--text-primary);
-        }
-
-        .hero-subtitle {
-            min-height: 60px;
-            border-radius: 0.5rem;
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-        }
+        .hero-bg { width: 100%; height: 100%; background-size: cover; background-position: center; transition: transform 0.5s ease; }
+        .hero-image-container:hover .hero-bg { transform: scale(1.05); }
 
         /* Profile Section */
-        #profil {
-            background-color: var(--bg-secondary);
-        }
-
-        .profile-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .profile-image {
-            border-radius: 1rem;
-            overflow: hidden;
-            box-shadow: var(--card-shadow);
-        }
-
-        .profile-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.6s ease;
-        }
-
-        .profile-image:hover img {
-            transform: scale(1.08);
-        }
-
-        .profile-info h3 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .profile-info .address-text {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-        }
-
-        .profile-details {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .detail-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            background: var(--bg-primary);
-            padding: 1rem;
-            border-radius: 0.5rem;
-        }
-
-        .detail-item i {
-            color: var(--accent-primary);
-            font-size: 1.5rem;
-            width: 30px;
-            text-align: center;
-        }
-
-        .detail-item strong {
-            display: block;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .detail-item span,
-        .detail-item a {
-            color: var(--text-secondary);
-            text-decoration: none;
-        }
-
-        .detail-item a:hover {
-            color: var(--accent-primary);
-        }
+        #profil { background-color: var(--bg-secondary); }
+        .profile-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4rem; align-items: center; }
+        .profile-image { border-radius: 1rem; overflow: hidden; box-shadow: var(--card-shadow); }
+        .profile-image img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
+        .profile-image:hover img { transform: scale(1.08); }
+        .profile-info h3 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .profile-info .address-text { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 2rem; }
+        .profile-details { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 2rem; }
+        .detail-item { display: flex; align-items: center; gap: 1rem; background: var(--bg-primary); padding: 1rem; border-radius: 0.5rem; }
+        .detail-item i { color: var(--accent-primary); font-size: 1.5rem; width: 30px; text-align: center; }
+        .detail-item strong { display: block; font-weight: 600; color: var(--text-primary); }
+        .detail-item span, .detail-item a { color: var(--text-secondary); text-decoration: none; }
+        .detail-item a:hover { color: var(--accent-primary); }
 
         /* Card Styles */
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .base-card {
-            background-color: var(--card-bg);
-            border-radius: 1rem;
-            overflow: hidden;
-            box-shadow: var(--card-shadow);
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            border: 1px solid var(--border-color);
-        }
-
-        .base-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--card-hover-shadow);
-            border-color: var(--accent-primary);
-        }
-
-        .card-img-wrapper {
-            width: 100%;
-            height: 220px;
-            overflow: hidden;
-        }
-
-        .card-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s ease;
-        }
-
-        .base-card:hover .card-img {
-            transform: scale(1.1);
-        }
-
-        .card-body {
-            padding: 1.5rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card-meta {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .card-meta span {
-            background-color: var(--bg-secondary);
-            padding: 0.25rem 0.75rem;
-            border-radius: 50px;
-            font-weight: 500;
-        }
-
-        .card-title {
-            font-size: 1.4rem;
-            margin-bottom: 0.75rem;
-            line-height: 1.3;
-            flex-grow: 1;
-        }
-
-        .card-title a {
-            text-decoration: none;
-            color: var(--text-primary);
-            transition: color 0.3s ease;
-        }
-
-        .card-title a:hover {
-            color: var(--accent-primary);
-        }
-
-        .card-footer {
-            margin-top: 1.5rem;
-        }
-
-        .card-footer .btn {
-            padding: 0.6rem 1.5rem;
-        }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2.5rem; }
+        .base-card { background-color: var(--card-bg); border-radius: 1rem; overflow: hidden; box-shadow: var(--card-shadow); transition: all 0.3s ease; display: flex; flex-direction: column; height: 100%; border: 1px solid var(--border-color); }
+        .base-card:hover { transform: translateY(-8px); box-shadow: var(--card-hover-shadow); border-color: var(--accent-primary); }
+        .card-img-wrapper { width: 100%; height: 220px; overflow: hidden; }
+        .card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+        .base-card:hover .card-img { transform: scale(1.1); }
+        .card-body { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .card-meta { display: flex; align-items: center; gap: 0.75rem; color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem; }
+        .card-meta span { background-color: var(--bg-secondary); padding: 0.25rem 0.75rem; border-radius: 50px; font-weight: 500; }
+        .card-title { font-size: 1.4rem; margin-bottom: 0.75rem; line-height: 1.3; flex-grow: 1; }
+        .card-title a { text-decoration: none; color: var(--text-primary); transition: color 0.3s ease; }
+        .card-title a:hover { color: var(--accent-primary); }
+        .card-footer { margin-top: 1.5rem; }
+        .card-footer .btn { padding: 0.6rem 1.5rem; }
 
         /* Aparatur Card */
-        .structure-card .card-img-wrapper {
-            height: 320px;
-        }
-
-        .structure-card .card-body {
-            text-align: center;
-        }
-
-        .structure-card h3 {
-            font-size: 1.5rem;
-        }
-
-        .structure-card p {
-            color: var(--accent-primary);
-            font-weight: 600;
-        }
+        .structure-card .card-img-wrapper { height: 320px; }
+        .structure-card .card-body { text-align: center; }
+        .structure-card h3 { font-size: 1.5rem; }
+        .structure-card p { color: var(--accent-primary); font-weight: 600; }
 
         /* Footer */
-        footer {
-            background-color: var(--bg-secondary);
-            color: var(--text-primary);
-            padding: 5rem 0 2rem;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 2fr;
-            gap: 3rem;
-            margin-bottom: 4rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-links {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .footer-links a {
-            text-decoration: none;
-            color: var(--text-secondary);
-            transition: color 0.3s ease, transform 0.3s ease;
-            display: inline-block;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent-primary);
-            transform: translateX(5px);
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-        }
-
-        .contact-item {
-            display: flex;
-            gap: 1rem;
-            align-items: flex-start;
-        }
-
-        .contact-item i {
-            color: var(--accent-primary);
-            font-size: 1.25rem;
-            margin-top: 5px;
-            width: 20px;
-        }
-
-        .contact-item span {
-            color: var(--text-secondary);
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .social-icons a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: var(--bg-primary);
-            color: var(--text-secondary);
-            transition: all 0.3s ease;
-        }
-
-        .social-icons a:hover {
-            background-color: var(--accent-primary);
-            color: white;
-            transform: translateY(-3px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
+        footer { background-color: var(--bg-secondary); color: var(--text-primary); padding: 5rem 0 2rem; border-top: 1px solid var(--border-color); }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 2fr; gap: 3rem; margin-bottom: 4rem; }
+        .footer-column h3 { font-size: 1.5rem; margin-bottom: 1.5rem; }
+        .footer-links { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+        .footer-links a { text-decoration: none; color: var(--text-secondary); transition: color 0.3s ease, transform 0.3s ease; display: inline-block; }
+        .footer-links a:hover { color: var(--accent-primary); transform: translateX(5px); }
+        .contact-info { display: flex; flex-direction: column; gap: 1.25rem; }
+        .contact-item { display: flex; gap: 1rem; align-items: flex-start; }
+        .contact-item i { color: var(--accent-primary); font-size: 1.25rem; margin-top: 5px; width: 20px; }
+        .contact-item span { color: var(--text-secondary); }
+        .social-icons { display: flex; gap: 1rem; margin-top: 1.5rem; }
+        .social-icons a { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background-color: var(--bg-primary); color: var(--text-secondary); transition: all 0.3s ease; }
+        .social-icons a:hover { background-color: var(--accent-primary); color: white; transform: translateY(-3px); }
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid var(--border-color); color: var(--text-secondary); font-size: 0.9rem; }
 
         /* Animations */
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Responsive */
         @media (max-width: 1024px) {
-            .hero-grid {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-                text-align: center;
-            }
-
-            .hero-buttons {
-                justify-content: center;
-            }
-
-            .hero-image-container {
-                height: 50vh;
-                order: -1;
-            }
-
-            /* Pindah ke atas di tablet */
-            .profile-grid {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
+            .hero-grid { grid-template-columns: 1fr; gap: 3rem; text-align: center; }
+            .hero-buttons { justify-content: center; }
+            .hero-image-container { height: 50vh; order: -1; } /* Pindah ke atas di tablet */
+            .profile-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
         }
 
         @media (max-width: 768px) {
-            h2 {
-                font-size: 2.2rem;
-            }
-
-            .container {
-                padding: 0 1.5rem;
-            }
-
-            .nav-menu {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 80%;
-                max-width: 350px;
-                height: 100vh;
-                background-color: var(--bg-primary);
-                flex-direction: column;
-                align-items: flex-start;
-                justify-content: center;
-                padding: 2rem;
-                gap: 2rem;
-                transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
-            }
-
-            .nav-menu.active {
-                right: 0;
-            }
-
-            .hamburger {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 40px;
-                height: 40px;
-                background: none;
-                border: none;
-                cursor: pointer;
-                color: var(--text-primary);
-                font-size: 1.5rem;
-            }
-
-            .hero-content h1 {
-                font-size: 2.75rem;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .social-icons,
-            .contact-info,
-            .footer-links {
-                align-items: center;
-                justify-content: center;
-            }
-
-            .contact-item {
-                text-align: left;
-            }
+            h2 { font-size: 2.2rem; } .container { padding: 0 1.5rem; }
+            .nav-menu { position: fixed; top: 0; right: -100%; width: 80%; max-width: 350px; height: 100vh; background-color: var(--bg-primary); flex-direction: column; align-items: flex-start; justify-content: center; padding: 2rem; gap: 2rem; transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1); box-shadow: -5px 0 20px rgba(0,0,0,0.1); }
+            .nav-menu.active { right: 0; }
+            .hamburger { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: none; border: none; cursor: pointer; color: var(--text-primary); font-size: 1.5rem; }
+            .hero-content h1 { font-size: 2.75rem; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .social-icons, .contact-info, .footer-links { align-items: center; justify-content: center; }
+            .contact-item { text-align: left; }
         }
 
         @media (max-width: 576px) {
-            .section {
-                padding: 4rem 0;
-            }
-
-            .hero-content h1 {
-                font-size: 2.25rem;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .card-grid {
-                grid-template-columns: 1fr;
-            }
+            .section { padding: 4rem 0; }
+            .hero-content h1 { font-size: 2.25rem; }
+            .hero-buttons { flex-direction: column; gap: 1rem; }
+            .card-grid { grid-template-columns: 1fr; }
         }
 
         /* Skeleton loading */
-        .skeleton {
-            background-color: var(--skeleton-bg);
-            border-radius: 0.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .skeleton::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -150%;
-            width: 150%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, var(--skeleton-highlight), transparent);
-            animation: skeletonLoading 1.8s infinite;
-        }
-
-        @keyframes skeletonLoading {
-            100% {
-                left: 150%;
-            }
-        }
+        .skeleton { background-color: var(--skeleton-bg); border-radius: 0.5rem; position: relative; overflow: hidden; }
+        .skeleton::after { content: ''; position: absolute; top: 0; left: -150%; width: 150%; height: 100%; background: linear-gradient(90deg, transparent, var(--skeleton-highlight), transparent); animation: skeletonLoading 1.8s infinite; }
+        @keyframes skeletonLoading { 100% { left: 150%; } }
     </style>
 </head>
-
 <body>
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-spinner"></div>
@@ -833,11 +321,10 @@
         <div class="container">
             <nav class="navbar">
                 <a href="#home" class="logo">
-                    <img id="village-logo" src="https://placehold.co/90x90/eef1f0/eef1f0" alt="Logo Desa"
-                        class="skeleton">
+                    <img id="village-logo" src="https://placehold.co/90x90/eef1f0/eef1f0" alt="Logo Desa" class="skeleton">
                     <div class="logo-text skeleton" id="village-name-header" style="width: 150px; height: 30px;"></div>
                 </a>
-
+                
                 <ul class="nav-menu" id="navMenu">
                     <li><a href="#home" class="active">Beranda</a></li>
                     <li><a href="#profil">Profil</a></li>
@@ -846,7 +333,7 @@
                     <li><a href="#umkm">UMKM</a></li>
                     <li><a href="#kegiatan">Kegiatan</a></li>
                 </ul>
-
+                
                 <div class="nav-actions">
                     <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">
                         <i class="fas fa-moon"></i>
@@ -863,23 +350,17 @@
         <section class="hero-section" id="home">
             <div class="container">
                 <div class="hero-grid">
-
-                    <!-- Konten Teks -->
                     <div class="hero-content">
-                        <h1 id="village-name-hero" class="skeleton hero-title"></h1>
-                        <p id="village-province" class="skeleton hero-subtitle"></p>
-
+                        <h1 id="village-name-hero" class="skeleton" style="height: 120px; border-radius: 1rem;"></h1>
+                        <p id="village-province" class="skeleton" style="height: 60px; border-radius: 0.5rem;"></p>
                         <div class="hero-buttons">
                             <a href="#profil" class="btn btn-primary">Jelajahi Desa</a>
                             <a href="#kontak" class="btn btn-secondary">Hubungi Kami</a>
                         </div>
                     </div>
-
-                    <!-- Gambar -->
                     <div class="hero-image-container">
                         <div class="hero-bg skeleton" id="heroBg"></div>
                     </div>
-
                 </div>
             </div>
         </section>
@@ -887,21 +368,19 @@
         <section class="section" id="profil">
             <div class="container">
                 <div class="section-title">
-                    <h2 id="profil-title">Profil Desa Sukawargi</h2>
-                    <p>Mengenal lebih dekat keindahan dan potensi Desa Sukawargi, sebuah desa yang rukun dan penuh
-                        semangat kekeluargaan.</p>
+                    <h2 id="profil-title">Profil Desa Pamulihan</h2>
+                    <p><span style="font-weight: bold;">Desa Pamulihan</span> terletak di Kecamatan Cisurupan, Kabupaten Garut, Provinsi Jawa Barat. Dikelilingi oleh alam yang subur dan panorama pegunungan, desa ini dikenal akan ketenangan suasananya dan semangat gotong royong warganya. Dengan potensi sumber daya alam dan budaya lokal yang kaya, <span style="font-weight: bold;">Desa Pamulihan</span> terus tumbuh menjadi desa yang mandiri, produktif, dan berdaya saing di tengah era modernisasi.</p>
                 </div>
-
+                
                 <div class="profile-grid">
                     <div class="profile-image">
-                        <img id="office-image" src="https://placehold.co/600x600/eef1f0/eef1f0" alt="Kantor Desa"
-                            class="skeleton">
+                        <img id="office-image" src="https://placehold.co/600x600/eef1f0/eef1f0" alt="Kantor Desa" class="skeleton">
                     </div>
-
+                    
                     <div class="profile-info">
                         <h3 id="village-name-profile" class="skeleton" style="width: 80%; height: 40px;"></h3>
                         <p id="village-address" class="address-text skeleton" style="height: 60px;"></p>
-
+                        
                         <div class="profile-details">
                             <div class="detail-item skeleton">
                                 <i class="fas fa-map-marked-alt"></i>
@@ -913,8 +392,7 @@
                             </div>
                             <div class="detail-item skeleton">
                                 <i class="fas fa-globe"></i>
-                                <div><strong>Website Resmi</strong><a id="village-url" href="#" target="_blank"
-                                        rel="noopener noreferrer"></a></div>
+                                <div><strong>Website Resmi</strong><a id="village-url" href="#" target="_blank" rel="noopener noreferrer"></a></div>
                             </div>
                         </div>
                     </div>
@@ -926,7 +404,7 @@
             <div class="container">
                 <div class="section-title">
                     <h2>Aparatur Desa</h2>
-                    <p>Struktur organisasi yang berdedikasi untuk melayani dan memajukan masyarakat Desa Sukawargi.</p>
+                    <p>Berikut adalah struktur aparatur pemerintahan <span style="font-weight: bold;">Desa Pamulihan</span>. Susunan perangkat desa ini terdiri dari kepala desa dan staf yang bertugas menjalankan fungsi pelayanan publik, pembangunan, serta pemberdayaan masyarakat sesuai dengan tugas pokok dan fungsinya masing-masing.</p>
                 </div>
                 <div class="card-grid" id="organizational-structure">
                     <div class="base-card structure-card skeleton" style="height: 450px;"></div>
@@ -935,12 +413,12 @@
                 </div>
             </div>
         </section>
-
+        
         <section class="section" id="berita" style="background-color: var(--bg-secondary);">
             <div class="container">
                 <div class="section-title">
                     <h2>Berita & Informasi</h2>
-                    <p>Ikuti perkembangan dan berita terkini langsung dari Desa Sukawargi.</p>
+                    <p>Dapatkan informasi terbaru, pengumuman penting, serta berbagai berita menarik seputar kegiatan, prestasi, dan perkembangan <span style="font-weight: bold;">Desa Pamulihan</span>. Kami berkomitmen untuk selalu menghadirkan kabar terkini agar masyarakat tetap terhubung dan mengetahui setiap langkah kemajuan desa menuju masa depan yang lebih baik.</p>
                 </div>
                 <div class="card-grid" id="news-container">
                     <div class="base-card skeleton" style="height: 480px;"></div>
@@ -954,8 +432,7 @@
             <div class="container">
                 <div class="section-title">
                     <h2>UMKM Unggulan</h2>
-                    <p>Temukan dan dukung produk-produk kreatif dan berkualitas dari para pelaku UMKM di Desa Sukawargi.
-                    </p>
+                    <p>Jelajahi beragam produk unggulan hasil karya para pelaku UMKM <span style="font-weight: bold;">Desa Pamulihan</span> yang penuh inovasi dan kreativitas. Dukung pertumbuhan ekonomi lokal dengan memilih produk-produk berkualitas, mulai dari makanan khas, kerajinan tangan, hingga layanan jasa yang menjadi kebanggaan masyarakat desa. Bersama, kita wujudkan desa yang mandiri dan sejahtera melalui pemberdayaan UMKM yang berkelanjutan.</p>
                 </div>
                 <div class="card-grid" id="umkm-container">
                     <div class="base-card skeleton" style="height: 480px;"></div>
@@ -969,7 +446,7 @@
             <div class="container">
                 <div class="section-title">
                     <h2>Galeri Kegiatan</h2>
-                    <p>Momen-momen kebersamaan dan pembangunan yang terekam dalam berbagai kegiatan desa.</p>
+                    <p>Abadikan setiap momen kebersamaan, gotong royong, dan semangat pembangunan yang tercermin dalam berbagai kegiatan <span style="font-weight: bold;">Desa Pamulihan</span>. Galeri ini menampilkan rangkaian dokumentasi aktivitas warga, mulai dari acara adat, kerja bakti, hingga inovasi dan prestasi desa yang menjadi bukti nyata kekompakan serta dedikasi masyarakat dalam membangun lingkungan yang harmonis dan berdaya saing.</p>
                 </div>
                 <div class="card-grid" id="activity-container">
                     <div class="base-card skeleton" style="height: 480px;"></div>
@@ -984,9 +461,8 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-column">
-                    <h3 id="footer-village-name">Desa Sukawargi</h3>
-                    <p id="footer-description" class="text-secondary">Sebuah desa di Kabupaten Tasikmalaya, berkomitmen
-                        untuk menjadi desa yang maju, mandiri, dan sejahtera melalui inovasi dan kolaborasi.</p>
+                    <h3 id="footer-village-name">Desa Pamulihan</h3>
+                    <p id="footer-description" class="text-secondary">Sebuah desa di Kabupaten Garut, berkomitmen untuk menjadi desa yang maju, mandiri, dan sejahtera melalui inovasi dan kolaborasi.</p>
                     <div class="social-icons">
                         <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -994,7 +470,7 @@
                         <a href="#" aria-label="Youtube"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
-
+                
                 <div class="footer-column">
                     <h3>Navigasi</h3>
                     <ul class="footer-links">
@@ -1006,7 +482,7 @@
                         <li><a href="#kegiatan">Kegiatan</a></li>
                     </ul>
                 </div>
-
+                
                 <div class="footer-column">
                     <h3>Hubungi Kami</h3>
                     <div class="contact-info">
@@ -1025,10 +501,9 @@
                     </div>
                 </div>
             </div>
-
+            
             <div class="copyright">
-                <p>&copy; <span id="current-year"></span> <span id="footer-copyright-name">Desa Sukawargi</span>. All
-                    Rights Reserved.</p>
+                <p>&copy; <span id="current-year"></span> <span id="footer-copyright-name">Desa Pamulihan</span>. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
@@ -1041,8 +516,8 @@
             const LOADING_DURATION = 1500;
 
             const urlParams = new URLSearchParams(window.location.search);
-            // GUID untuk Desa Sukawargi
-            const guid = urlParams.get('guid') || '1b84950f-048a-41bf-9555-ab0e6dc15726';
+            // GUID untuk Desa Pamulihan
+            const guid = urlParams.get('guid') || 'aa78273b-4a39-499b-a259-018a479e4d63';
 
             // --- ELEMEN DOM ---
             const elements = {
@@ -1084,7 +559,7 @@
                     el.style.removeProperty('width');
                 }
             };
-
+            
             const fetchWithCache = async (endpoint) => {
                 const cacheKey = `desa-data-${guid}-${endpoint}`;
                 const cachedData = sessionStorage.getItem(cacheKey);
@@ -1106,7 +581,7 @@
             function initThemeToggle() {
                 const savedTheme = localStorage.getItem('theme') || 'light';
                 elements.themeToggle.innerHTML = savedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-
+                
                 elements.themeToggle.addEventListener('click', () => {
                     const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
                     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -1121,7 +596,7 @@
                     elements.navMenu.classList.toggle('active');
                     elements.hamburger.innerHTML = elements.navMenu.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
                 });
-
+                
                 document.querySelectorAll('.nav-menu a').forEach(link => {
                     link.addEventListener('click', () => {
                         elements.navMenu.classList.remove('active');
@@ -1129,10 +604,10 @@
                     });
                 });
             }
-
+            
             function initScrollBehavior() {
                 let lastScrollTop = 0;
-                window.addEventListener("scroll", function () {
+                window.addEventListener("scroll", function() {
                     let st = window.pageYOffset || document.documentElement.scrollTop;
                     if (st > lastScrollTop && st > 100) {
                         elements.header.classList.add('header-hidden');
@@ -1143,7 +618,7 @@
                 }, false);
 
                 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                    anchor.addEventListener('click', function (e) {
+                    anchor.addEventListener('click', function(e) {
                         e.preventDefault();
                         const targetId = this.getAttribute('href');
                         const target = document.querySelector(targetId);
@@ -1153,12 +628,12 @@
                     });
                 });
             }
-
+            
             // --- RENDER KONTEN ---
             function createStructureCard(person) {
                 const defaultImage = 'https://placehold.co/400x400/F5F5F4/78716C?text=Foto';
                 const imageUrl = person.file ? `${IMAGE_BASE_URL}${person.file}` : defaultImage;
-
+                
                 return `
                     <div class="base-card structure-card">
                         <div class="card-img-wrapper">
@@ -1175,7 +650,7 @@
             function createContentCard(item) {
                 const defaultImage = 'https://placehold.co/600x400/F5F5F4/78716C?text=Gambar';
                 const imageUrl = item.file ? `${IMAGE_BASE_URL}${item.file}` : defaultImage;
-
+                
                 let title = item.name || 'Judul Tidak Tersedia';
                 let date = item.createAt ? new Date(item.createAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) : 'Tanggal tidak tersedia';
 
@@ -1204,25 +679,25 @@
                     console.error("Gagal memuat profil desa.");
                     return;
                 }
-
+                
                 const village = data.vaillage;
-                const villageName = `Desa ${village.name || 'Sukawargi'}`;
-
-                document.title = `${villageName} - Kabupaten Tasikmalaya`;
-
+                const villageName = `${village.name || 'Pamulihan'}`;
+                
+                document.title = `${villageName} - Kabupaten Garut`;
+                
                 elements.logo.src = village.logo ? `${IMAGE_BASE_URL}${village.logo}` : 'https://placehold.co/90x90/D97706/ffffff?text=S';
                 removeSkeleton(elements.logo);
                 elements.headerName.textContent = villageName;
                 removeSkeleton(elements.headerName);
-
+                
                 elements.heroBg.style.backgroundImage = `url(${village.banner ? IMAGE_BASE_URL + village.banner : 'https://images.unsplash.com/photo-1511229577352-c035b5a4595a?q=80&w=1770&auto=format&fit=crop'})`;
                 removeSkeleton(elements.heroBg);
-
+                
                 elements.heroName.innerHTML = `Selamat Datang di<br><span class="accent">${villageName}</span>`;
                 removeSkeleton(elements.heroName);
                 elements.province.textContent = village.description || `${village.province || ''}, ${village.district || ''}. Desa yang menjunjung tinggi nilai kebersamaan dan gotong royong.`;
                 removeSkeleton(elements.province);
-
+                
                 elements.officeImage.src = village.office ? `${IMAGE_BASE_URL}${village.office}` : 'https://placehold.co/600x600/eef1f0/a0b4c1?text=Kantor+Desa';
                 removeSkeleton(elements.officeImage);
                 elements.profileTitle.textContent = `Profil ${villageName}`;
@@ -1237,13 +712,13 @@
                 elements.url.textContent = village.url || 'Tidak tersedia';
                 elements.url.href = village.url || '#';
                 removeSkeleton(document.querySelector('.detail-item:nth-child(3)'));
-
+                
                 if (village.organizationalStructure && village.organizationalStructure.length > 0) {
                     elements.structureContainer.innerHTML = village.organizationalStructure.map(createStructureCard).join('');
                 } else {
                     elements.structureContainer.innerHTML = '<p class="text-center text-secondary col-span-full">Data aparatur desa tidak tersedia.</p>';
                 }
-
+                
                 elements.footerVillageName.textContent = villageName;
                 elements.footerAddress.textContent = village.address || '-';
                 elements.footerEmail.textContent = village.email || '-';
@@ -1263,25 +738,25 @@
                     container.innerHTML = `<p class="text-center text-secondary col-span-full">Data ${type} tidak tersedia saat ini.</p>`;
                 }
             }
-
+            
             // --- INISIALISASI ---
             async function init() {
                 initThemeToggle();
                 initMobileMenu();
                 initScrollBehavior();
-
+                
                 const startTime = Date.now();
-
+                
                 await Promise.all([
                     loadProfile(),
                     loadSection('news', elements.newsContainer),
                     loadSection('umkm', elements.umkmContainer),
                     loadSection('activity', elements.activityContainer)
                 ]);
-
+                
                 const elapsedTime = Date.now() - startTime;
                 const remainingTime = LOADING_DURATION - elapsedTime;
-
+                
                 setTimeout(() => {
                     elements.loadingScreen.classList.add('hidden');
                 }, remainingTime > 0 ? remainingTime : 0);
@@ -1291,5 +766,4 @@
         });
     </script>
 </body>
-
 </html>

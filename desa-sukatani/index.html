@@ -1,191 +1,895 @@
 <!DOCTYPE html>
 <html lang="id" class="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Desa Sukatani - Kabupaten Tasikmalaya</title>
-    
+
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
+
     <script>
         // Menerapkan tema yang tersimpan untuk mencegah FOUC
-        (function() {
+        (function () {
             const savedTheme = localStorage.getItem('theme') || 'light';
             document.documentElement.className = savedTheme;
         })();
     </script>
-    
+
     <style>
         :root {
-            /* Tema Terang (Modern & Clean) */
-            --bg-primary: #F8F9FA;
+            /* Tema Terang (Modern & Elegan) */
+            --bg-primary: #F8FBFD;
             --bg-secondary: #FFFFFF;
-            --text-primary: #212529;
-            --text-secondary: #6C757D;
-            --accent-primary: #4F46E5; /* Indigo 600 */
-            --accent-secondary: #4338CA; /* Indigo 700 */
+            --text-primary: #1E293B;
+            --text-secondary: #64748B;
+            --accent-primary: #4F46E5;
+            --accent-secondary: #4338CA;
+            --accent-gradient: linear-gradient(135deg, #4F46E5, #7C3AED);
             --card-bg: #FFFFFF;
-            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
-            --card-hover-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
-            --header-bg: rgba(248, 249, 250, 0.8);
+            --card-shadow: 0 6px 20px rgba(79, 70, 229, 0.08);
+            --card-hover-shadow: 0 12px 25px rgba(79, 70, 229, 0.15);
+            --header-bg: rgba(248, 251, 253, 0.95);
             --hero-overlay: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1));
-            --skeleton-bg: #E9ECEF;
-            --skeleton-highlight: #F8F9FA;
-            --border-color: #DEE2E6;
-            --btn-primary-bg: var(--accent-primary);
-            --btn-primary-hover-bg: var(--accent-secondary);
+            --skeleton-bg: #F1F5F9;
+            --skeleton-highlight: #FFFFFF;
+            --border-color: #E2E8F0;
+            --btn-primary-bg: var(--accent-gradient);
+            --btn-primary-hover-bg: linear-gradient(135deg, #4338CA, #6D28D9);
+            --section-gap: 7rem;
         }
 
         .dark {
-            /* Tema Gelap (Modern & Clean) */
-            --bg-primary: #18181B; /* Zinc 900 */
-            --bg-secondary: #27272A; /* Zinc 800 */
-            --text-primary: #F4F4F5; /* Zinc 100 */
-            --text-secondary: #A1A1AA; /* Zinc 400 */
-            --accent-primary: #818CF8; /* Indigo 400 */
-            --accent-secondary: #A78BFA; /* Violet 400 */
-            --card-bg: #27272A;
-            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --card-hover-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-            --header-bg: rgba(24, 24, 27, 0.8);
-            --hero-overlay: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2));
-            --skeleton-bg: #3F3F46; /* Zinc 700 */
-            --skeleton-highlight: #52525B; /* Zinc 600 */
-            --border-color: #3F3F46;
-            --btn-primary-bg: var(--accent-primary);
-            --btn-primary-hover-bg: var(--accent-secondary);
+            /* Tema Gelap (Modern & Elegan) */
+            --bg-primary: #0F172A;
+            --bg-secondary: #1E293B;
+            --text-primary: #F1F5F9;
+            --text-secondary: #94A3B8;
+            --accent-primary: #818CF8;
+            --accent-secondary: #A78BFA;
+            --accent-gradient: linear-gradient(135deg, #818CF8, #C084FC);
+            --card-bg: #1E293B;
+            --card-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            --card-hover-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+            --header-bg: rgba(15, 23, 42, 0.95);
+            --hero-overlay: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
+            --skeleton-bg: #334155;
+            --skeleton-highlight: #475569;
+            --border-color: #334155;
+            --btn-primary-bg: var(--accent-gradient);
+            --btn-primary-hover-bg: linear-gradient(135deg, #6366F1, #A855F7);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-primary);
             color: var(--text-primary);
-            line-height: 1.6;
+            line-height: 1.7;
             transition: background-color 0.3s ease, color 0.3s ease;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        h1, h2, h3, h4, h5, h6 { font-weight: 700; color: var(--text-primary); }
-        .container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
-        .section { padding: 6rem 0; }
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.3;
+            letter-spacing: -0.025em;
+        }
 
-        .section-title { text-align: center; margin-bottom: 4rem; }
-        .section-title h2 { font-size: 2.5rem; margin-bottom: 1rem; position: relative; font-weight: 800; }
-        .section-title p { color: var(--text-secondary); max-width: 600px; margin: 1rem auto 0; font-size: 1.1rem; }
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
 
-        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 2rem; border-radius: 0.5rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: all 0.3s ease; text-align: center; border: 2px solid transparent; }
-        .btn-primary { background-color: var(--btn-primary-bg); color: white; }
-        .btn-primary:hover { background-color: var(--btn-primary-hover-bg); transform: translateY(-3px); box-shadow: 0 6px 15px rgba(79, 70, 229, 0.2); }
-        .btn-secondary { background-color: transparent; color: var(--text-primary); border-color: var(--border-color); }
-        .btn-secondary:hover { background-color: var(--accent-primary); color: white; border-color: var(--accent-primary); transform: translateY(-3px); }
+        .section {
+            padding: var(--section-gap) 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.25rem;
+            position: relative;
+            font-weight: 800;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent-gradient);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 1.5rem auto 0;
+            font-size: 1.15rem;
+            font-weight: 400;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.9rem 2.2rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            filter: brightness(1.1);
+        }
+
+        .btn-primary {
+            background: var(--btn-primary-bg);
+            color: white;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--accent-primary);
+            border: 2px solid var(--accent-primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--accent-primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.2);
+        }
 
         /* Loading Screen */
-        .loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--bg-primary); display: flex; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.7s ease, visibility 0.7s ease; }
-        .loading-screen.hidden { opacity: 0; visibility: hidden; }
-        .loading-spinner { width: 60px; height: 60px; border: 5px solid var(--border-color); border-top-color: var(--accent-primary); border-radius: 50%; animation: spin 1.2s ease-in-out infinite; }
-        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.7s ease, visibility 0.7s ease;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid var(--border-color);
+            border-top-color: var(--accent-primary);
+            border-radius: 50%;
+            animation: spin 1.2s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
 
         /* Header */
-        header { position: fixed; top: 0; width: 100%; z-index: 1000; background-color: var(--header-bg); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-color); padding: 1rem 0; transition: top 0.3s ease-in-out; }
-        .header-hidden { top: -100px; }
-        .navbar { display: flex; justify-content: space-between; align-items: center; }
-        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
-        .logo img { width: 45px; height: 45px; border-radius: 0.5rem; object-fit: cover; }
-        .logo-text { font-size: 1.5rem; font-weight: 800; color: var(--text-primary); }
-        .nav-menu { display: flex; list-style: none; gap: 2.5rem; }
-        .nav-menu li a { text-decoration: none; color: var(--text-secondary); font-weight: 600; position: relative; transition: color 0.3s ease; padding-bottom: 5px; }
-        .nav-menu li a:hover, .nav-menu li a.active { color: var(--accent-primary); }
-        .nav-actions { display: flex; align-items: center; gap: 0.5rem; }
-        .theme-toggle { background: var(--bg-secondary); border: 1px solid var(--border-color); cursor: pointer; color: var(--text-secondary); font-size: 1.1rem; width: 40px; height: 40px; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
-        .theme-toggle:hover { background-color: var(--accent-primary); color: white; border-color: var(--accent-primary); }
-        .hamburger { display: none; z-index: 1001; }
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: var(--header-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.85rem 0;
+            transition: top 0.3s ease-in-out, box-shadow 0.3s ease;
+        }
+
+        .header-scrolled {
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .header-hidden {
+            top: -100px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 0.75rem;
+            object-fit: cover;
+            border: 1px solid var(--border-color);
+        }
+
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.03em;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-menu li a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 600;
+            position: relative;
+            transition: color 0.3s ease;
+            padding-bottom: 5px;
+            font-size: 1.05rem;
+        }
+
+        .nav-menu li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gradient);
+            transition: width 0.3s ease;
+            border-radius: 1px;
+        }
+
+        .nav-menu li a:hover,
+        .nav-menu li a.active {
+            color: var(--accent-primary);
+        }
+
+        .nav-menu li a:hover::after,
+        .nav-menu li a.active::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .theme-toggle {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            width: 42px;
+            height: 42px;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--accent-primary);
+            color: white;
+            border-color: var(--accent-primary);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+        }
+
+        .hamburger {
+            display: none;
+            z-index: 1001;
+        }
 
         /* Hero Section */
-        .hero-section { min-height: 80vh; position: relative; display: flex; align-items: center; color: white; padding: 8rem 0; }
-        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; z-index: -2; }
-        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--hero-overlay); z-index: -1; }
-        .hero-content { max-width: 700px; text-align: center; margin: 0 auto; padding: 0 1.5rem; animation: fadeUp 1.2s ease-out 0.5s backwards; }
-        .hero-content h1 { font-size: 3.5rem; line-height: 1.2; margin-bottom: 1.5rem; color: white; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); font-weight: 800; }
-        .hero-content p { font-size: 1.2rem; margin-bottom: 2.5rem; color: rgba(255, 255, 255, 0.9); }
-        .hero-buttons { display: flex; justify-content: center; gap: 1.5rem; }
-        .hero-buttons .btn-secondary { color: white; border-color: rgba(255, 255, 255, 0.5); }
-        .hero-buttons .btn-secondary:hover { border-color: var(--accent-primary); }
+        .hero-section {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            color: white;
+            padding: 8rem 0;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--hero-overlay);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            text-align: center;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            animation: fadeUp 1.2s ease-out 0.5s backwards;
+        }
+
+        .hero-content h1 {
+            font-size: 3.8rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .hero-buttons .btn-secondary {
+            color: white;
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .hero-buttons .btn-secondary:hover {
+            border-color: var(--accent-primary);
+            background: var(--accent-primary);
+        }
 
         /* Profile Section */
-        .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-        .profile-image img { width: 100%; height: auto; border-radius: 1rem; box-shadow: var(--card-shadow); }
-        .profile-info h3 { font-size: 2.5rem; margin-bottom: 1rem; }
-        .profile-info p { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 2rem; }
-        .profile-stats { display: flex; gap: 2rem; margin-top: 2rem; }
-        .stat-item { text-align: center; }
-        .stat-item .stat-number { font-size: 2rem; font-weight: 800; color: var(--accent-primary); }
-        .stat-item .stat-label { font-size: 0.9rem; color: var(--text-secondary); }
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .profile-image {
+            position: relative;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .profile-image:hover img {
+            transform: scale(1.03);
+        }
+
+        .profile-info h3 {
+            font-size: 2.6rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        .profile-info p {
+            color: var(--text-secondary);
+            font-size: 1.15rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: 2.5rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .stat-item .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item .stat-label {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
 
         /* Card Styles */
-        .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; }
-        .base-card { background-color: var(--card-bg); border-radius: 1rem; overflow: hidden; box-shadow: var(--card-shadow); transition: all 0.3s ease; display: flex; flex-direction: column; height: 100%; }
-        .base-card:hover { transform: translateY(-5px); box-shadow: var(--card-hover-shadow); }
-        .card-img-wrapper { width: 100%; height: 220px; overflow: hidden; }
-        .card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
-        .base-card:hover .card-img { transform: scale(1.05); }
-        .card-body { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
-        .card-meta { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem; }
-        .card-title { font-size: 1.3rem; margin-bottom: 1rem; line-height: 1.4; flex-grow: 1; }
-        .card-title a { text-decoration: none; color: var(--text-primary); transition: color 0.3s ease; }
-        .card-title a:hover { color: var(--accent-primary); }
-        .card-footer { margin-top: auto; }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .base-card {
+            background-color: var(--card-bg);
+            border-radius: 1.25rem;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border: 1px solid var(--border-color);
+        }
+
+        .base-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--card-hover-shadow);
+            border-color: rgba(79, 70, 229, 0.2);
+        }
+
+        .card-img-wrapper {
+            width: 100%;
+            height: 240px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-img-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .base-card:hover .card-img-wrapper::before {
+            opacity: 1;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .base-card:hover .card-img {
+            transform: scale(1.05);
+        }
+
+        .card-body {
+            padding: 1.8rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+            flex-grow: 1;
+        }
+
+        .card-title a {
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+            font-weight: 700;
+        }
+
+        .card-title a:hover {
+            color: var(--accent-primary);
+        }
+
+        .card-footer {
+            margin-top: auto;
+            padding-top: 1.5rem;
+        }
 
         /* Footer */
-        footer { background-color: var(--bg-secondary); padding: 5rem 0 2rem; border-top: 1px solid var(--border-color); }
-        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 2fr; gap: 3rem; margin-bottom: 4rem; }
-        .footer-column h3 { font-size: 1.2rem; margin-bottom: 1.5rem; font-weight: 600; }
-        .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
-        .footer-links a { text-decoration: none; color: var(--text-secondary); transition: color 0.3s ease; }
-        .footer-links a:hover { color: var(--accent-primary); }
-        .contact-info { display: flex; flex-direction: column; gap: 1rem; }
-        .contact-item { display: flex; gap: 1rem; align-items: flex-start; }
-        .contact-item i { color: var(--accent-primary); font-size: 1.1rem; margin-top: 5px; width: 20px; }
-        .contact-item span { color: var(--text-secondary); }
-        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid var(--border-color); color: var(--text-secondary); font-size: 0.9rem; }
+        footer {
+            background-color: var(--bg-secondary);
+            padding: 4rem 0 1.5rem;
+            /* Dikurangin dari 6rem jadi 4rem */
+            border-top: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: -150px;
+            right: -150px;
+            width: 300px;
+            height: 300px;
+            background: var(--accent-gradient);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            opacity: 0.05;
+            z-index: 0;
+        }
+
+        footer::after {
+            content: '';
+            position: absolute;
+            bottom: -150px;
+            left: -150px;
+            width: 400px;
+            height: 400px;
+            background: var(--accent-gradient);
+            border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%;
+            opacity: 0.05;
+            z-index: 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 2fr;
+            gap: 3rem;
+            /* Dikurangin dari 4rem jadi 3rem */
+            margin-bottom: 3rem;
+            /* Dikurangin dari 4rem jadi 3rem */
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            /* Dikurangin sedikit dari 1.4rem */
+            margin-bottom: 1.5rem;
+            /* Dikurangin dari 1.8rem */
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent-gradient);
+            border-radius: 2px;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            display: inline-block;
+            padding: 0.3rem 0;
+            font-weight: 500;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-primary);
+            transform: translateX(5px);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .contact-item i {
+            color: var(--accent-primary);
+            font-size: 1.1rem;
+            margin-top: 3px;
+            width: 18px;
+            flex-shrink: 0;
+        }
+
+        .contact-item span {
+            color: var(--text-secondary);
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
 
         /* Animations */
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
         /* Responsive */
         @media (max-width: 1024px) {
-            .profile-grid { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
         }
+
         @media (max-width: 768px) {
-            h2 { font-size: 2.2rem; } .container { padding: 0 1.5rem; }
-            .nav-menu { position: fixed; top: 0; right: -100%; width: 80%; max-width: 350px; height: 100vh; background-color: var(--bg-secondary); flex-direction: column; align-items: flex-start; justify-content: center; padding: 2rem; gap: 2rem; transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1); box-shadow: -5px 0 20px rgba(0,0,0,0.1); }
-            .nav-menu.active { right: 0; }
-            .hamburger { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: none; border: none; cursor: pointer; color: var(--text-primary); font-size: 1.5rem; }
-            .hero-content h1 { font-size: 2.75rem; }
-            .footer-grid { grid-template-columns: 1fr; text-align: center; }
-            .contact-info, .footer-links { align-items: center; justify-content: center; }
-            .contact-item { text-align: left; }
+            :root {
+                --section-gap: 5rem;
+            }
+
+            h2 {
+                font-size: 2.2rem;
+            }
+
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 350px;
+                height: 100vh;
+                background-color: var(--bg-secondary);
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: center;
+                padding: 2rem;
+                gap: 2rem;
+                transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .hamburger {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 42px;
+                height: 42px;
+                background: none;
+                border: none;
+                cursor: pointer;
+                color: var(--text-primary);
+                font-size: 1.5rem;
+                background: var(--bg-secondary);
+                border-radius: 0.75rem;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            }
+
+            .hero-content h1 {
+                font-size: 2.75rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .contact-info,
+            .footer-links {
+                align-items: center;
+                justify-content: center;
+            }
+
+            .footer-column h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .contact-item {
+                justify-content: center;
+                text-align: center;
+            }
         }
+
         @media (max-width: 576px) {
-            .section { padding: 4rem 0; }
-            .hero-content h1 { font-size: 2.25rem; }
-            .hero-buttons { flex-direction: column; gap: 1rem; }
-            .card-grid { grid-template-columns: 1fr; }
+            :root {
+                --section-gap: 4rem;
+            }
+
+            .hero-section {
+                padding: 6rem 0;
+                min-height: 90vh;
+            }
+
+            .hero-content h1 {
+                font-size: 2.25rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-stats {
+                gap: 1.5rem;
+            }
+
+            .stat-item {
+                min-width: 80px;
+            }
         }
 
         /* Skeleton loading */
-        .skeleton { background-color: var(--skeleton-bg); border-radius: 0.5rem; position: relative; overflow: hidden; }
-        .skeleton::after { content: ''; position: absolute; top: 0; left: -150%; width: 150%; height: 100%; background: linear-gradient(90deg, transparent, var(--skeleton-highlight), transparent); animation: skeletonLoading 1.8s infinite; }
-        @keyframes skeletonLoading { 100% { left: 150%; } }
+        .skeleton {
+            background-color: var(--skeleton-bg);
+            border-radius: 0.75rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skeleton::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 150%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--skeleton-highlight), transparent);
+            animation: skeletonLoading 1.8s infinite;
+        }
+
+        @keyframes skeletonLoading {
+            100% {
+                left: 150%;
+            }
+        }
     </style>
 </head>
+
 <body>
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-spinner"></div>
@@ -195,10 +899,11 @@
         <div class="container">
             <nav class="navbar">
                 <a href="#home" class="logo">
-                    <img id="village-logo" src="https://placehold.co/90x90/E9ECEF/E9ECEF" alt="Logo Desa" class="skeleton">
-                    <div class="logo-text skeleton" id="village-name-header" style="width: 150px; height: 30px;"></div>
+                    <img id="village-logo" src="https://placehold.co/90x90/4F46E5/ffffff?text=S" alt="Logo Desa"
+                        class="skeleton">
+                    <div class="logo-text skeleton" id="village-name-header" style="width: 180px; height: 35px;"></div>
                 </a>
-                
+
                 <ul class="nav-menu" id="navMenu">
                     <li><a href="#home" class="active">Beranda</a></li>
                     <li><a href="#profil">Profil</a></li>
@@ -207,7 +912,7 @@
                     <li><a href="#umkm">UMKM</a></li>
                     <li><a href="#kegiatan">Kegiatan</a></li>
                 </ul>
-                
+
                 <div class="nav-actions">
                     <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">
                         <i class="fas fa-moon"></i>
@@ -222,15 +927,17 @@
 
     <main>
         <section class="hero-section" id="home">
-            <div class="hero-bg skeleton" id="heroBg"></div>
+            <div class="hero-bg skeleton" id="heroBg"
+                style="background-image: url('https://images.unsplash.com/photo-1586773860418-d37222d8fce3?q=80&w=2073&auto=format&fit=crop')">
+            </div>
             <div class="hero-overlay"></div>
             <div class="container">
                 <div class="hero-content">
                     <h1 id="village-name-hero" class="skeleton" style="height: 120px; border-radius: 1rem;"></h1>
-                    <p id="village-province" class="skeleton" style="height: 60px; border-radius: 0.5rem;"></p>
+                    <p id="village-province" class="skeleton" style="height: 70px; border-radius: 0.5rem;"></p>
                     <div class="hero-buttons">
                         <a href="#profil" class="btn btn-primary"><i class="fas fa-info-circle"></i> Selengkapnya</a>
-                        <a href="#kontak" class="btn btn-secondary">Hubungi Kami</a>
+                        <a href="#kontak" class="btn btn-secondary"><i class="fas fa-phone-alt"></i> Hubungi Kami</a>
                     </div>
                 </div>
             </div>
@@ -240,15 +947,30 @@
             <div class="container">
                 <div class="profile-grid">
                     <div class="profile-image">
-                        <img id="office-image" src="https://placehold.co/600x600/E9ECEF/E9ECEF" alt="Kantor Desa" class="skeleton">
+                        <img id="office-image"
+                            src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop"
+                            alt="Kantor Desa" class="skeleton">
                     </div>
                     <div class="profile-info">
-                        <h3 id="village-name-profile" class="skeleton" style="width: 80%; height: 40px;"></h3>
-                        <p id="village-address" class="skeleton" style="height: 100px;"></p>
+                        <h3 id="village-name-profile" class="skeleton" style="width: 80%; height: 45px;"></h3>
+                        <p id="village-address" class="skeleton" style="height: 120px;"></p>
                         <div class="profile-stats">
-                            <div class="stat-item"><div class="stat-number">12</div><div class="stat-label">Dusun</div></div>
-                            <div class="stat-item"><div class="stat-number">45</div><div class="stat-label">RT</div></div>
-                            <div class="stat-item"><div class="stat-number">3K+</div><div class="stat-label">Penduduk</div></div>
+                            <div class="stat-item">
+                                <div class="stat-number">12</div>
+                                <div class="stat-label">Dusun</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">45</div>
+                                <div class="stat-label">RT</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">3K+</div>
+                                <div class="stat-label">Penduduk</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">25</div>
+                                <div class="stat-label">UMKM</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -268,7 +990,7 @@
                 </div>
             </div>
         </section>
-        
+
         <section class="section" id="berita">
             <div class="container">
                 <div class="section-title">
@@ -287,7 +1009,8 @@
             <div class="container">
                 <div class="section-title">
                     <h2>UMKM Unggulan</h2>
-                    <p>Temukan dan dukung produk-produk kreatif dan berkualitas dari para pelaku UMKM di Desa Sukatani.</p>
+                    <p>Temukan dan dukung produk-produk kreatif dan berkualitas dari para pelaku UMKM di Desa Sukatani.
+                    </p>
                 </div>
                 <div class="card-grid" id="umkm-container">
                     <div class="base-card skeleton" style="height: 480px;"></div>
@@ -317,36 +1040,48 @@
             <div class="footer-grid">
                 <div class="footer-column">
                     <h3 id="footer-village-name">Desa Sukatani</h3>
-                    <p id="footer-description" class="text-secondary">Sebuah desa di Kabupaten Tasikmalaya, berkomitmen untuk menjadi desa yang maju, mandiri, dan sejahtera.</p>
+                    <p id="footer-description" class="text-secondary">Sebuah desa di Kabupaten Tasikmalaya, berkomitmen
+                        untuk menjadi desa yang maju, mandiri, dan sejahtera.</p>
                 </div>
-                
+
                 <div class="footer-column">
                     <h3>Tautan Cepat</h3>
                     <ul class="footer-links">
-                        <li><a href="#home">Beranda</a></li>
-                        <li><a href="#profil">Profil Desa</a></li>
-                        <li><a href="#aparatur">Aparatur</a></li>
-                        <li><a href="#berita">Berita</a></li>
+                        <li><a href="#home"><i class="fas fa-home mr-2"></i> Beranda</a></li>
+                        <li><a href="#profil"><i class="fas fa-info-circle mr-2"></i> Profil Desa</a></li>
+                        <li><a href="#aparatur"><i class="fas fa-users mr-2"></i> Aparatur</a></li>
+                        <li><a href="#berita"><i class="fas fa-newspaper mr-2"></i> Berita</a></li>
+                        <li><a href="#umkm"><i class="fas fa-store mr-2"></i> UMKM</a></li>
+                        <li><a href="#kegiatan"><i class="fas fa-images mr-2"></i> Kegiatan</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-column">
                     <h3>Hubungi Kami</h3>
                     <div class="contact-info">
                         <div class="contact-item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span id="footer-village-address">Alamat lengkap desa akan ditampilkan di sini.</span>
+                            <span id="footer-village-address">Jl. Desa Sukatani No. 123, Kabupaten Tasikmalaya, Jawa
+                                Barat</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-envelope"></i>
-                            <span id="footer-village-email">email@desa.id</span>
+                            <span id="footer-village-email">info@desasukatani.id</span>
                         </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <span id="footer-village-phone">(0265) 123-4567</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-globe"></i>
+                            <span id="footer-village-website">https://desa-situsari.lskk.co.id/</span>
                     </div>
                 </div>
             </div>
-            
+
             <div class="copyright">
-                <p>&copy; <span id="current-year"></span> <span id="footer-copyright-name">Desa Sukatani</span>. All Rights Reserved.</p>
+                <p>&copy; <span id="current-year"></span> <span id="footer-copyright-name">Desa Sukatani</span>. All
+                    Rights Reserved.</p>
             </div>
         </div>
     </footer>
@@ -360,7 +1095,7 @@
 
             const urlParams = new URLSearchParams(window.location.search);
             // GUID untuk Desa Sukatani
-            const guid = urlParams.get('guid') || 'c7442333-41ae-4629-b9a6-dd3256513d40';
+            const guid = urlParams.get('guid') || '0fe7f3e4-7f89-463d-9211-7206184f5988';
 
             // --- ELEMEN DOM ---
             const elements = {
@@ -398,7 +1133,7 @@
                     el.style.removeProperty('width');
                 }
             };
-            
+
             const fetchWithCache = async (endpoint) => {
                 const cacheKey = `desa-data-${guid}-${endpoint}`;
                 const cachedData = sessionStorage.getItem(cacheKey);
@@ -420,7 +1155,7 @@
             function initThemeToggle() {
                 const savedTheme = localStorage.getItem('theme') || 'light';
                 elements.themeToggle.innerHTML = savedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-                
+
                 elements.themeToggle.addEventListener('click', () => {
                     const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
                     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -435,7 +1170,7 @@
                     elements.navMenu.classList.toggle('active');
                     elements.hamburger.innerHTML = elements.navMenu.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
                 });
-                
+
                 document.querySelectorAll('.nav-menu a').forEach(link => {
                     link.addEventListener('click', () => {
                         elements.navMenu.classList.remove('active');
@@ -443,21 +1178,49 @@
                     });
                 });
             }
-            
+
             function initScrollBehavior() {
                 let lastScrollTop = 0;
-                window.addEventListener("scroll", function() {
+                window.addEventListener("scroll", function () {
                     let st = window.pageYOffset || document.documentElement.scrollTop;
+
+                    // Header scroll effect
+                    if (st > 100) {
+                        elements.header.classList.add('header-scrolled');
+                    } else {
+                        elements.header.classList.remove('header-scrolled');
+                    }
+
+                    // Hide header on scroll down
                     if (st > lastScrollTop && st > 100) {
                         elements.header.classList.add('header-hidden');
                     } else {
                         elements.header.classList.remove('header-hidden');
                     }
                     lastScrollTop = st <= 0 ? 0 : st;
+
+                    // Update active nav link
+                    const sections = document.querySelectorAll('section');
+                    const navLinks = document.querySelectorAll('.nav-menu a');
+
+                    let current = '';
+                    sections.forEach(section => {
+                        const sectionTop = section.offsetTop;
+                        if (st >= sectionTop - 150) {
+                            current = section.getAttribute('id');
+                        }
+                    });
+
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href').substring(1) === current) {
+                            link.classList.add('active');
+                        }
+                    });
                 }, false);
 
                 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                    anchor.addEventListener('click', function(e) {
+                    anchor.addEventListener('click', function (e) {
                         e.preventDefault();
                         const targetId = this.getAttribute('href');
                         const target = document.querySelector(targetId);
@@ -467,48 +1230,48 @@
                     });
                 });
             }
-            
+
             // --- RENDER KONTEN ---
             function createStructureCard(person) {
-                const defaultImage = 'https://placehold.co/400x400/E9ECEF/6C757D?text=Foto';
+                const defaultImage = 'https://placehold.co/400x400/F1F5F9/4F46E5?text=Foto';
                 const imageUrl = person.file ? `${IMAGE_BASE_URL}${person.file}` : defaultImage;
-                
+
                 return `
-                    <div class="base-card">
-                        <div class="card-img-wrapper">
-                            <img src="${imageUrl}" alt="${person.name || 'Nama'}" class="card-img" loading="lazy" onerror="this.src='${defaultImage}'">
+                        <div class="base-card">
+                            <div class="card-img-wrapper">
+                                <img src="${imageUrl}" alt="${person.name || 'Nama'}" class="card-img" loading="lazy" onerror="this.src='${defaultImage}'">
+                            </div>
+                            <div class="card-body" style="text-align: center;">
+                                <h3 class="card-title" style="font-size: 1.3rem;">${person.name || 'Nama Tidak Tersedia'}</h3>
+                                <p style="color: var(--accent-primary); font-weight: 600; margin-top: 0.5rem;">${person.position || 'Jabatan Tidak Tersedia'}</p>
+                            </div>
                         </div>
-                        <div class="card-body" style="text-align: center;">
-                            <h3 class="card-title" style="font-size: 1.2rem;">${person.name || 'Nama Tidak Tersedia'}</h3>
-                            <p style="color: var(--accent-primary); font-weight: 500;">${person.position || 'Jabatan Tidak Tersedia'}</p>
-                        </div>
-                    </div>
-                `;
+                    `;
             }
 
             function createContentCard(item) {
-                const defaultImage = 'https://placehold.co/600x400/E9ECEF/6C757D?text=Gambar';
+                const defaultImage = 'https://placehold.co/600x400/F1F5F9/4F46E5?text=Gambar';
                 const imageUrl = item.file ? `${IMAGE_BASE_URL}${item.file}` : defaultImage;
-                
+
                 let title = item.name || 'Judul Tidak Tersedia';
                 let date = item.createAt ? new Date(item.createAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) : 'Tanggal tidak tersedia';
 
                 return `
-                    <div class="base-card">
-                        <div class="card-img-wrapper">
-                            <img src="${imageUrl}" alt="${title}" class="card-img" loading="lazy" onerror="this.src='${defaultImage}'">
-                        </div>
-                        <div class="card-body">
-                            <div class="card-meta">
-                                <i class="far fa-calendar-alt"></i><span>${date}</span>
+                        <div class="base-card">
+                            <div class="card-img-wrapper">
+                                <img src="${imageUrl}" alt="${title}" class="card-img" loading="lazy" onerror="this.src='${defaultImage}'">
                             </div>
-                            <h3 class="card-title"><a href="#">${title}</a></h3>
-                            <div class="card-footer">
-                                <a href="#" class="btn btn-primary btn-sm">Selengkapnya</a>
+                            <div class="card-body">
+                                <div class="card-meta">
+                                    <i class="far fa-calendar-alt"></i><span>${date}</span>
+                                </div>
+                                <h3 class="card-title"><a href="#">${title}</a></h3>
+                                <div class="card-footer">
+                                    <a href="#" class="btn btn-primary">Selengkapnya</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                `;
+                    `;
             }
 
             // --- PEMUATAN DATA ---
@@ -518,38 +1281,38 @@
                     console.error("Gagal memuat profil desa.");
                     return;
                 }
-                
+
                 const village = data.vaillage;
                 const villageName = `Desa ${village.name || 'Sukatani'}`;
-                
+
                 document.title = `${villageName} - Kabupaten Tasikmalaya`;
-                
+
                 elements.logo.src = village.logo ? `${IMAGE_BASE_URL}${village.logo}` : 'https://placehold.co/90x90/4F46E5/ffffff?text=S';
                 removeSkeleton(elements.logo);
                 elements.headerName.textContent = villageName;
                 removeSkeleton(elements.headerName);
-                
-                elements.heroBg.style.backgroundImage = `url(${village.banner ? IMAGE_BASE_URL + village.banner : 'https://images.unsplash.com/photo-1590182181486-334b2a8d4a6c?q=80&w=1804&auto=format&fit=crop'})`;
+
+                elements.heroBg.style.backgroundImage = `url(${village.banner ? IMAGE_BASE_URL + village.banner : 'https://images.unsplash.com/photo-1586773860418-d37222d8fce3?q=80&w=2073&auto=format&fit=crop'})`;
                 removeSkeleton(elements.heroBg);
-                
+
                 elements.heroName.innerHTML = `Selamat Datang di ${villageName}`;
                 removeSkeleton(elements.heroName);
                 elements.province.textContent = village.description || `${village.province || ''}, ${village.district || ''}. Desa modern yang berakar pada tradisi, berinovasi untuk masa depan.`;
                 removeSkeleton(elements.province);
-                
-                elements.officeImage.src = village.office ? `${IMAGE_BASE_URL}${village.office}` : 'https://placehold.co/600x600/E9ECEF/6C757D?text=Kantor+Desa';
+
+                elements.officeImage.src = village.office ? `${IMAGE_BASE_URL}${village.office}` : 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop';
                 removeSkeleton(elements.officeImage);
                 elements.profileName.textContent = `Tentang ${villageName}`;
                 removeSkeleton(elements.profileName);
                 elements.address.textContent = village.address || 'Alamat tidak tersedia.';
                 removeSkeleton(elements.address);
-                
+
                 if (village.organizationalStructure && village.organizationalStructure.length > 0) {
                     elements.structureContainer.innerHTML = village.organizationalStructure.map(createStructureCard).join('');
                 } else {
                     elements.structureContainer.innerHTML = '<p class="text-center text-secondary col-span-full">Data aparatur desa tidak tersedia.</p>';
                 }
-                
+
                 elements.footerVillageName.textContent = villageName;
                 elements.footerAddress.textContent = village.address || '-';
                 elements.footerEmail.textContent = village.email || '-';
@@ -569,25 +1332,25 @@
                     container.innerHTML = `<p class="text-center text-secondary col-span-full">Data ${type} tidak tersedia saat ini.</p>`;
                 }
             }
-            
+
             // --- INISIALISASI ---
             async function init() {
                 initThemeToggle();
                 initMobileMenu();
                 initScrollBehavior();
-                
+
                 const startTime = Date.now();
-                
+
                 await Promise.all([
                     loadProfile(),
                     loadSection('news', elements.newsContainer),
                     loadSection('umkm', elements.umkmContainer),
                     loadSection('activity', elements.activityContainer)
                 ]);
-                
+
                 const elapsedTime = Date.now() - startTime;
                 const remainingTime = LOADING_DURATION - elapsedTime;
-                
+
                 setTimeout(() => {
                     elements.loadingScreen.classList.add('hidden');
                 }, remainingTime > 0 ? remainingTime : 0);
@@ -597,4 +1360,5 @@
         });
     </script>
 </body>
+
 </html>

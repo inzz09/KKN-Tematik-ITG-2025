@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="id" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desa Sukatani - Kabupaten Tasikmalaya</title>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script>
+        // Menerapkan tema yang tersimpan untuk mencegah FOUC
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.className = savedTheme;
+        })();
+    </script>
+    
+    <style>
+        :root {
+            /* Tema Terang (Modern & Clean) */
+            --bg-primary: #F8F9FA;
+            --bg-secondary: #FFFFFF;
+            --text-primary: #212529;
+            --text-secondary: #6C757D;
+            --accent-primary: #4F46E5; /* Indigo 600 */
+            --accent-secondary: #4338CA; /* Indigo 700 */
+            --card-bg: #FFFFFF;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+            --card-hover-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
+            --header-bg: rgba(248, 249, 250, 0.8);
+            --hero-overlay: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1));
+            --skeleton-bg: #E9ECEF;
+            --skeleton-highlight: #F8F9FA;
+            --border-color: #DEE2E6;
+            --btn-primary-bg: var(--accent-primary);
+            --btn-primary-hover-bg: var(--accent-secondary);
+        }
+
+        .dark {
+            /* Tema Gelap (Modern & Clean) */
+            --bg-primary: #18181B; /* Zinc 900 */
+            --bg-secondary: #27272A; /* Zinc 800 */
+            --text-primary: #F4F4F5; /* Zinc 100 */
+            --text-secondary: #A1A1AA; /* Zinc 400 */
+            --accent-primary: #818CF8; /* Indigo 400 */
+            --accent-secondary: #A78BFA; /* Violet 400 */
+            --card-bg: #27272A;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --card-hover-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            --header-bg: rgba(24, 24, 27, 0.8);
+            --hero-overlay: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2));
+            --skeleton-bg: #3F3F46; /* Zinc 700 */
+            --skeleton-highlight: #52525B; /* Zinc 600 */
+            --border-color: #3F3F46;
+            --btn-primary-bg: var(--accent-primary);
+            --btn-primary-hover-bg: var(--accent-secondary);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1, h2, h3, h4, h5, h6 { font-weight: 700; color: var(--text-primary); }
+        .container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
+        .section { padding: 6rem 0; }
+
+        .section-title { text-align: center; margin-bottom: 4rem; }
+        .section-title h2 { font-size: 2.5rem; margin-bottom: 1rem; position: relative; font-weight: 800; }
+        .section-title p { color: var(--text-secondary); max-width: 600px; margin: 1rem auto 0; font-size: 1.1rem; }
+
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 2rem; border-radius: 0.5rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: all 0.3s ease; text-align: center; border: 2px solid transparent; }
+        .btn-primary { background-color: var(--btn-primary-bg); color: white; }
+        .btn-primary:hover { background-color: var(--btn-primary-hover-bg); transform: translateY(-3px); box-shadow: 0 6px 15px rgba(79, 70, 229, 0.2); }
+        .btn-secondary { background-color: transparent; color: var(--text-primary); border-color: var(--border-color); }
+        .btn-secondary:hover { background-color: var(--accent-primary); color: white; border-color: var(--accent-primary); transform: translateY(-3px); }
+
+        /* Loading Screen */
+        .loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--bg-primary); display: flex; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.7s ease, visibility 0.7s ease; }
+        .loading-screen.hidden { opacity: 0; visibility: hidden; }
+        .loading-spinner { width: 60px; height: 60px; border: 5px solid var(--border-color); border-top-color: var(--accent-primary); border-radius: 50%; animation: spin 1.2s ease-in-out infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Header */
+        header { position: fixed; top: 0; width: 100%; z-index: 1000; background-color: var(--header-bg); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-color); padding: 1rem 0; transition: top 0.3s ease-in-out; }
+        .header-hidden { top: -100px; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo img { width: 45px; height: 45px; border-radius: 0.5rem; object-fit: cover; }
+        .logo-text { font-size: 1.5rem; font-weight: 800; color: var(--text-primary); }
+        .nav-menu { display: flex; list-style: none; gap: 2.5rem; }
+        .nav-menu li a { text-decoration: none; color: var(--text-secondary); font-weight: 600; position: relative; transition: color 0.3s ease; padding-bottom: 5px; }
+        .nav-menu li a:hover, .nav-menu li a.active { color: var(--accent-primary); }
+        .nav-actions { display: flex; align-items: center; gap: 0.5rem; }
+        .theme-toggle { background: var(--bg-secondary); border: 1px solid var(--border-color); cursor: pointer; color: var(--text-secondary); font-size: 1.1rem; width: 40px; height: 40px; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
+        .theme-toggle:hover { background-color: var(--accent-primary); color: white; border-color: var(--accent-primary); }
+        .hamburger { display: none; z-index: 1001; }
+
+        /* Hero Section */
+        .hero-section { min-height: 80vh; position: relative; display: flex; align-items: center; color: white; padding: 8rem 0; }
+        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; z-index: -2; }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--hero-overlay); z-index: -1; }
+        .hero-content { max-width: 700px; text-align: center; margin: 0 auto; padding: 0 1.5rem; animation: fadeUp 1.2s ease-out 0.5s backwards; }
+        .hero-content h1 { font-size: 3.5rem; line-height: 1.2; margin-bottom: 1.5rem; color: white; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); font-weight: 800; }
+        .hero-content p { font-size: 1.2rem; margin-bottom: 2.5rem; color: rgba(255, 255, 255, 0.9); }
+        .hero-buttons { display: flex; justify-content: center; gap: 1.5rem; }
+        .hero-buttons .btn-secondary { color: white; border-color: rgba(255, 255, 255, 0.5); }
+        .hero-buttons .btn-secondary:hover { border-color: var(--accent-primary); }
+
+        /* Profile Section */
+        .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .profile-image img { width: 100%; height: auto; border-radius: 1rem; box-shadow: var(--card-shadow); }
+        .profile-info h3 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .profile-info p { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 2rem; }
+        .profile-stats { display: flex; gap: 2rem; margin-top: 2rem; }
+        .stat-item { text-align: center; }
+        .stat-item .stat-number { font-size: 2rem; font-weight: 800; color: var(--accent-primary); }
+        .stat-item .stat-label { font-size: 0.9rem; color: var(--text-secondary); }
+
+        /* Card Styles */
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; }
+        .base-card { background-color: var(--card-bg); border-radius: 1rem; overflow: hidden; box-shadow: var(--card-shadow); transition: all 0.3s ease; display: flex; flex-direction: column; height: 100%; }
+        .base-card:hover { transform: translateY(-5px); box-shadow: var(--card-hover-shadow); }
+        .card-img-wrapper { width: 100%; height: 220px; overflow: hidden; }
+        .card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+        .base-card:hover .card-img { transform: scale(1.05); }
+        .card-body { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .card-meta { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem; }
+        .card-title { font-size: 1.3rem; margin-bottom: 1rem; line-height: 1.4; flex-grow: 1; }
+        .card-title a { text-decoration: none; color: var(--text-primary); transition: color 0.3s ease; }
+        .card-title a:hover { color: var(--accent-primary); }
+        .card-footer { margin-top: auto; }
+
+        /* Footer */
+        footer { background-color: var(--bg-secondary); padding: 5rem 0 2rem; border-top: 1px solid var(--border-color); }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 2fr; gap: 3rem; margin-bottom: 4rem; }
+        .footer-column h3 { font-size: 1.2rem; margin-bottom: 1.5rem; font-weight: 600; }
+        .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+        .footer-links a { text-decoration: none; color: var(--text-secondary); transition: color 0.3s ease; }
+        .footer-links a:hover { color: var(--accent-primary); }
+        .contact-info { display: flex; flex-direction: column; gap: 1rem; }
+        .contact-item { display: flex; gap: 1rem; align-items: flex-start; }
+        .contact-item i { color: var(--accent-primary); font-size: 1.1rem; margin-top: 5px; width: 20px; }
+        .contact-item span { color: var(--text-secondary); }
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid var(--border-color); color: var(--text-secondary); font-size: 0.9rem; }
+
+        /* Animations */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .profile-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            h2 { font-size: 2.2rem; } .container { padding: 0 1.5rem; }
+            .nav-menu { position: fixed; top: 0; right: -100%; width: 80%; max-width: 350px; height: 100vh; background-color: var(--bg-secondary); flex-direction: column; align-items: flex-start; justify-content: center; padding: 2rem; gap: 2rem; transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1); box-shadow: -5px 0 20px rgba(0,0,0,0.1); }
+            .nav-menu.active { right: 0; }
+            .hamburger { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: none; border: none; cursor: pointer; color: var(--text-primary); font-size: 1.5rem; }
+            .hero-content h1 { font-size: 2.75rem; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .contact-info, .footer-links { align-items: center; justify-content: center; }
+            .contact-item { text-align: left; }
+        }
+        @media (max-width: 576px) {
+            .section { padding: 4rem 0; }
+            .hero-content h1 { font-size: 2.25rem; }
+            .hero-buttons { flex-direction: column; gap: 1rem; }
+            .card-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Skeleton loading */
+        .skeleton { background-color: var(--skeleton-bg); border-radius: 0.5rem; position: relative; overflow: hidden; }
+        .skeleton::after { content: ''; position: absolute; top: 0; left: -150%; width: 150%; height: 100%; background: linear-gradient(90deg, transparent, var(--skeleton-highlight), transparent); animation: skeletonLoading 1.8s infinite; }
+        @keyframes skeletonLoading { 100% { left: 150%; } }
+    </style>
+</head>
+<body>
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <header id="main-header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="#home" class="logo">
+                    <img id="village-logo" src="https://placehold.co/90x90/E9ECEF/E9ECEF" alt="Logo Desa" class="skeleton">
+                    <div class="logo-text skeleton" id="village-name-header" style="width: 150px; height: 30px;"></div>
+                </a>
+                
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home" class="active">Beranda</a></li>
+                    <li><a href="#profil">Profil</a></li>
+                    <li><a href="#aparatur">Aparatur</a></li>
+                    <li><a href="#berita">Berita</a></li>
+                    <li><a href="#umkm">UMKM</a></li>
+                    <li><a href="#kegiatan">Kegiatan</a></li>
+                </ul>
+                
+                <div class="nav-actions">
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section" id="home">
+            <div class="hero-bg skeleton" id="heroBg"></div>
+            <div class="hero-overlay"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <h1 id="village-name-hero" class="skeleton" style="height: 120px; border-radius: 1rem;"></h1>
+                    <p id="village-province" class="skeleton" style="height: 60px; border-radius: 0.5rem;"></p>
+                    <div class="hero-buttons">
+                        <a href="#profil" class="btn btn-primary"><i class="fas fa-info-circle"></i> Selengkapnya</a>
+                        <a href="#kontak" class="btn btn-secondary">Hubungi Kami</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="profil">
+            <div class="container">
+                <div class="profile-grid">
+                    <div class="profile-image">
+                        <img id="office-image" src="https://placehold.co/600x600/E9ECEF/E9ECEF" alt="Kantor Desa" class="skeleton">
+                    </div>
+                    <div class="profile-info">
+                        <h3 id="village-name-profile" class="skeleton" style="width: 80%; height: 40px;"></h3>
+                        <p id="village-address" class="skeleton" style="height: 100px;"></p>
+                        <div class="profile-stats">
+                            <div class="stat-item"><div class="stat-number">12</div><div class="stat-label">Dusun</div></div>
+                            <div class="stat-item"><div class="stat-number">45</div><div class="stat-label">RT</div></div>
+                            <div class="stat-item"><div class="stat-number">3K+</div><div class="stat-label">Penduduk</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="aparatur" style="background-color: var(--bg-secondary);">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Aparatur Desa</h2>
+                    <p>Mengenal tim yang berdedikasi untuk melayani dan membangun Desa Sukatani.</p>
+                </div>
+                <div class="card-grid" id="organizational-structure">
+                    <div class="base-card skeleton" style="height: 450px;"></div>
+                    <div class="base-card skeleton" style="height: 450px;"></div>
+                    <div class="base-card skeleton" style="height: 450px;"></div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section" id="berita">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Berita & Informasi</h2>
+                    <p>Ikuti perkembangan dan berita terkini langsung dari Desa Sukatani.</p>
+                </div>
+                <div class="card-grid" id="news-container">
+                    <div class="base-card skeleton" style="height: 480px;"></div>
+                    <div class="base-card skeleton" style="height: 480px;"></div>
+                    <div class="base-card skeleton" style="height: 480px;"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="umkm" style="background-color: var(--bg-secondary);">
+            <div class="container">
+                <div class="section-title">
+                    <h2>UMKM Unggulan</h2>
+                    <p>Temukan dan dukung produk-produk kreatif dan berkualitas dari para pelaku UMKM di Desa Sukatani.</p>
+                </div>
+                <div class="card-grid" id="umkm-container">
+                    <div class="base-card skeleton" style="height: 480px;"></div>
+                    <div class="base-card skeleton" style="height: 480px;"></div>
+                    <div class="base-card skeleton" style="height: 480px;"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="kegiatan">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Galeri Kegiatan</h2>
+                    <p>Momen-momen kebersamaan dan pembangunan yang terekam dalam berbagai kegiatan desa.</p>
+                </div>
+                <div class="card-grid" id="activity-container">
+                    <div class="base-card skeleton" style="height: 480px;"></div>
+                    <div class="base-card skeleton" style="height: 480px;"></div>
+                    <div class="base-card skeleton" style="height: 480px;"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="kontak">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3 id="footer-village-name">Desa Sukatani</h3>
+                    <p id="footer-description" class="text-secondary">Sebuah desa di Kabupaten Tasikmalaya, berkomitmen untuk menjadi desa yang maju, mandiri, dan sejahtera.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Tautan Cepat</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Beranda</a></li>
+                        <li><a href="#profil">Profil Desa</a></li>
+                        <li><a href="#aparatur">Aparatur</a></li>
+                        <li><a href="#berita">Berita</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Hubungi Kami</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span id="footer-village-address">Alamat lengkap desa akan ditampilkan di sini.</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span id="footer-village-email">email@desa.id</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; <span id="current-year"></span> <span id="footer-copyright-name">Desa Sukatani</span>. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- KONFIGURASI ---
+            const API_BASE_URL = "https://api-kawal-desa.lskk.co.id";
+            const IMAGE_BASE_URL = "https://bucket-2.nos.wjv-1.neo.id/";
+            const LOADING_DURATION = 1500;
+
+            const urlParams = new URLSearchParams(window.location.search);
+            // GUID untuk Desa Sukatani
+            const guid = urlParams.get('guid') || '0fe7f3e4-7f89-463d-9211-7206184f5988';
+
+            // --- ELEMEN DOM ---
+            const elements = {
+                loadingScreen: document.getElementById('loadingScreen'),
+                header: document.getElementById('main-header'),
+                logo: document.getElementById('village-logo'),
+                headerName: document.getElementById('village-name-header'),
+                heroBg: document.getElementById('heroBg'),
+                heroName: document.getElementById('village-name-hero'),
+                province: document.getElementById('village-province'),
+                officeImage: document.getElementById('office-image'),
+                profileName: document.getElementById('village-name-profile'),
+                address: document.getElementById('village-address'),
+                structureContainer: document.getElementById('organizational-structure'),
+                newsContainer: document.getElementById('news-container'),
+                umkmContainer: document.getElementById('umkm-container'),
+                activityContainer: document.getElementById('activity-container'),
+                footerVillageName: document.getElementById('footer-village-name'),
+                footerAddress: document.getElementById('footer-village-address'),
+                footerEmail: document.getElementById('footer-village-email'),
+                footerCopyright: document.getElementById('footer-copyright-name'),
+                currentYear: document.getElementById('current-year'),
+                themeToggle: document.getElementById('themeToggle'),
+                hamburger: document.getElementById('hamburger'),
+                navMenu: document.getElementById('navMenu')
+            };
+
+            elements.currentYear.textContent = new Date().getFullYear();
+
+            // --- FUNGSI BANTU ---
+            const removeSkeleton = (el) => {
+                if (el) {
+                    el.classList.remove('skeleton');
+                    el.style.removeProperty('height');
+                    el.style.removeProperty('width');
+                }
+            };
+            
+            const fetchWithCache = async (endpoint) => {
+                const cacheKey = `desa-data-${guid}-${endpoint}`;
+                const cachedData = sessionStorage.getItem(cacheKey);
+                if (cachedData) return JSON.parse(cachedData);
+
+                try {
+                    const response = await fetch(`${API_BASE_URL}${endpoint}`);
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    const data = await response.json();
+                    sessionStorage.setItem(cacheKey, JSON.stringify(data));
+                    return data;
+                } catch (error) {
+                    console.error("Could not fetch data:", error);
+                    return null;
+                }
+            };
+
+            // --- FUNGSI UI ---
+            function initThemeToggle() {
+                const savedTheme = localStorage.getItem('theme') || 'light';
+                elements.themeToggle.innerHTML = savedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+                
+                elements.themeToggle.addEventListener('click', () => {
+                    const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+                    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                    document.documentElement.className = newTheme;
+                    localStorage.setItem('theme', newTheme);
+                    elements.themeToggle.innerHTML = newTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+                });
+            }
+
+            function initMobileMenu() {
+                elements.hamburger.addEventListener('click', () => {
+                    elements.navMenu.classList.toggle('active');
+                    elements.hamburger.innerHTML = elements.navMenu.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+                });
+                
+                document.querySelectorAll('.nav-menu a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        elements.navMenu.classList.remove('active');
+                        elements.hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+                    });
+                });
+            }
+            
+            function initScrollBehavior() {
+                let lastScrollTop = 0;
+                window.addEventListener("scroll", function() {
+                    let st = window.pageYOffset || document.documentElement.scrollTop;
+                    if (st > lastScrollTop && st > 100) {
+                        elements.header.classList.add('header-hidden');
+                    } else {
+                        elements.header.classList.remove('header-hidden');
+                    }
+                    lastScrollTop = st <= 0 ? 0 : st;
+                }, false);
+
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const targetId = this.getAttribute('href');
+                        const target = document.querySelector(targetId);
+                        if (target) {
+                            window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+                        }
+                    });
+                });
+            }
+            
+            // --- RENDER KONTEN ---
+            function createStructureCard(person) {
+                const defaultImage = 'https://placehold.co/400x400/E9ECEF/6C757D?text=Foto';
+                const imageUrl = person.file ? `${IMAGE_BASE_URL}${person.file}` : defaultImage;
+                
+                return `
+                    <div class="base-card">
+                        <div class="card-img-wrapper">
+                            <img src="${imageUrl}" alt="${person.name || 'Nama'}" class="card-img" loading="lazy" onerror="this.src='${defaultImage}'">
+                        </div>
+                        <div class="card-body" style="text-align: center;">
+                            <h3 class="card-title" style="font-size: 1.2rem;">${person.name || 'Nama Tidak Tersedia'}</h3>
+                            <p style="color: var(--accent-primary); font-weight: 500;">${person.position || 'Jabatan Tidak Tersedia'}</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function createContentCard(item) {
+                const defaultImage = 'https://placehold.co/600x400/E9ECEF/6C757D?text=Gambar';
+                const imageUrl = item.file ? `${IMAGE_BASE_URL}${item.file}` : defaultImage;
+                
+                let title = item.name || 'Judul Tidak Tersedia';
+                let date = item.createAt ? new Date(item.createAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) : 'Tanggal tidak tersedia';
+
+                return `
+                    <div class="base-card">
+                        <div class="card-img-wrapper">
+                            <img src="${imageUrl}" alt="${title}" class="card-img" loading="lazy" onerror="this.src='${defaultImage}'">
+                        </div>
+                        <div class="card-body">
+                            <div class="card-meta">
+                                <i class="far fa-calendar-alt"></i><span>${date}</span>
+                            </div>
+                            <h3 class="card-title"><a href="#">${title}</a></h3>
+                            <div class="card-footer">
+                                <a href="#" class="btn btn-primary btn-sm">Selengkapnya</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // --- PEMUATAN DATA ---
+            async function loadProfile() {
+                const data = await fetchWithCache(`/api/village/profile?guid=${guid}`);
+                if (!data || !data.vaillage) {
+                    console.error("Gagal memuat profil desa.");
+                    return;
+                }
+                
+                const village = data.vaillage;
+                const villageName = `Desa ${village.name || 'Sukatani'}`;
+                
+                document.title = `${villageName} - Kabupaten Tasikmalaya`;
+                
+                elements.logo.src = village.logo ? `${IMAGE_BASE_URL}${village.logo}` : 'https://placehold.co/90x90/4F46E5/ffffff?text=S';
+                removeSkeleton(elements.logo);
+                elements.headerName.textContent = villageName;
+                removeSkeleton(elements.headerName);
+                
+                elements.heroBg.style.backgroundImage = `url(${village.banner ? IMAGE_BASE_URL + village.banner : 'https://images.unsplash.com/photo-1590182181486-334b2a8d4a6c?q=80&w=1804&auto=format&fit=crop'})`;
+                removeSkeleton(elements.heroBg);
+                
+                elements.heroName.innerHTML = `Selamat Datang di ${villageName}`;
+                removeSkeleton(elements.heroName);
+                elements.province.textContent = village.description || `${village.province || ''}, ${village.district || ''}. Desa modern yang berakar pada tradisi, berinovasi untuk masa depan.`;
+                removeSkeleton(elements.province);
+                
+                elements.officeImage.src = village.office ? `${IMAGE_BASE_URL}${village.office}` : 'https://placehold.co/600x600/E9ECEF/6C757D?text=Kantor+Desa';
+                removeSkeleton(elements.officeImage);
+                elements.profileName.textContent = `Tentang ${villageName}`;
+                removeSkeleton(elements.profileName);
+                elements.address.textContent = village.address || 'Alamat tidak tersedia.';
+                removeSkeleton(elements.address);
+                
+                if (village.organizationalStructure && village.organizationalStructure.length > 0) {
+                    elements.structureContainer.innerHTML = village.organizationalStructure.map(createStructureCard).join('');
+                } else {
+                    elements.structureContainer.innerHTML = '<p class="text-center text-secondary col-span-full">Data aparatur desa tidak tersedia.</p>';
+                }
+                
+                elements.footerVillageName.textContent = villageName;
+                elements.footerAddress.textContent = village.address || '-';
+                elements.footerEmail.textContent = village.email || '-';
+                elements.footerCopyright.textContent = villageName;
+            }
+
+            async function loadSection(type, container) {
+                const endpointMap = {
+                    'news': `/api/report/village?guid=${guid}&page=1&limit=3&type=news`,
+                    'umkm': `/api/umkm/village?guid=${guid}&page=1&limit=3`,
+                    'activity': `/api/report/village?guid=${guid}&page=1&limit=3&type=activity`
+                };
+                const data = await fetchWithCache(endpointMap[type]);
+                if (data && data.data && data.data.length > 0) {
+                    container.innerHTML = data.data.map(createContentCard).join('');
+                } else {
+                    container.innerHTML = `<p class="text-center text-secondary col-span-full">Data ${type} tidak tersedia saat ini.</p>`;
+                }
+            }
+            
+            // --- INISIALISASI ---
+            async function init() {
+                initThemeToggle();
+                initMobileMenu();
+                initScrollBehavior();
+                
+                const startTime = Date.now();
+                
+                await Promise.all([
+                    loadProfile(),
+                    loadSection('news', elements.newsContainer),
+                    loadSection('umkm', elements.umkmContainer),
+                    loadSection('activity', elements.activityContainer)
+                ]);
+                
+                const elapsedTime = Date.now() - startTime;
+                const remainingTime = LOADING_DURATION - elapsedTime;
+                
+                setTimeout(() => {
+                    elements.loadingScreen.classList.add('hidden');
+                }, remainingTime > 0 ? remainingTime : 0);
+            }
+
+            init();
+        });
+    </script>
+</body>
+</html>

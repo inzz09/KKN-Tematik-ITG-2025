@@ -464,7 +464,7 @@
 
             const urlParams = new URLSearchParams(window.location.search);
             // GUID untuk Desa Cidatar
-            const guid = urlParams.get('guid') || '05953047-92a8-486a-8488-ab93d7265893';
+            const guid = urlParams.get('guid') || '812da861-8d28-42b6-83ab-ed709a4713bd';
 
             // --- ELEMEN DOM ---
             const elements = {
@@ -629,9 +629,9 @@
                 if (village.banner) {
                     elements.heroBg.style.backgroundImage = `url(${IMAGE_BASE_URL}${village.banner})`;
                 } else {
-                    elements.heroBg.style.backgroundImage = `url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=1770&auto=format&fit=crop')`;
+                    elements.heroBg.style.backgroundImage = `url('https://images.unsplash.com/photo-812da861-8d28-42b6-83ab-ed709a4713bd?q=80&w=1770&auto=format&fit=crop')`;
                 }
-                removeSkeleton(elements.heroBg);
+                removeSkeleton(elements.heroBg);    
                 
                 if (village.organizationalStructure && village.organizationalStructure.length > 0) {
                     elements.structureContainer.innerHTML = village.organizationalStructure.map(createStructureCard).join('');

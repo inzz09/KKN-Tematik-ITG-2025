@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Desa Balewangi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-white text-gray-800">
+    <!-- Navbar -->
+    <header id="navbar"
+        class="fixed top-0 left-0 w-full z-50 bg-white/70 backdrop-blur-md shadow transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <img id="village-logo" src="" alt="Logo Desa" class="w-10 h-10 object-contain" />
+                <span class="text-xl font-bold text-lime-600">Desa Balewangi</span>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-semibold text-gray-700">
+                <a href="#hero" class="hover:text-lime-600 transition">Beranda</a>
+                <a href="#profil" class="hover:text-lime-600 transition">Profil</a>
+                <a href="#aparatur" class="hover:text-lime-600 transition">Aparatur</a>
+                <a href="#berita" class="hover:text-lime-600 transition">Berita</a>
+                <a href="#umkm" class="hover:text-lime-600 transition">UMKM</a>
+                <a href="#galeri" class="hover:text-lime-600 transition">Galeri</a>
+            </nav>
+            <button id="menu-toggle" class="md:hidden text-2xl text-gray-600 hover:text-lime-600">☰</button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden px-4 pb-4 bg-white shadow">
+            <a href="#hero" class="block py-2 text-sm font-medium text-gray-700 hover:text-lime-600">Beranda</a>
+            <a href="#profil" class="block py-2 text-sm font-medium text-gray-700 hover:text-lime-600">Profil</a>
+            <a href="#aparatur" class="block py-2 text-sm font-medium text-gray-700 hover:text-lime-600">Aparatur</a>
+            <a href="#berita" class="block py-2 text-sm font-medium text-gray-700 hover:text-lime-600">Berita</a>
+            <a href="#umkm" class="block py-2 text-sm font-medium text-gray-700 hover:text-lime-600">UMKM</a>
+            <a href="#galeri" class="block py-2 text-sm font-medium text-gray-700 hover:text-lime-600">Galeri</a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section id="hero" class="pt-32 pb-20 bg-gradient-to-br from-lime-100 via-white to-lime-50" data-aos="fade-up">
+        <div class="container max-w-screen-xl mx-auto px-4 grid md:grid-cols-2 gap-y-12 md:gap-12 items-center">
+            <div>
+                <h2 id="hero-title"
+                    class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-lime-700 mb-4">
+                    Selamat Datang di Desa Balewangi
+                </h2>
+                <p id="hero-desc" class="text-lg text-gray-700 mb-8 max-w-xl">
+                    Mewujudkan desa yang maju, mandiri, dan sejahtera bersama masyarakat yang berdaya dan harmonis.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#profil"
+                        class="w-full sm:w-auto px-6 py-3 bg-lime-600 text-white rounded-lg shadow-lg hover:bg-lime-700 transition">Jelajahi
+                        Desa</a>
+                    <a href="#kontak"
+                        class="w-full sm:w-auto px-6 py-3 border border-lime-600 text-lime-700 rounded-lg hover:bg-lime-100 transition">Hubungi
+                        Kami</a>
+                </div>
+            </div>
+            <div class="h-[300px] md:h-[420px] rounded-xl overflow-hidden shadow-lg ring-1 ring-lime-200">
+                <img id="hero-img" src="https://placehold.co/600x400?text=Foto+Desa" alt="Foto Desa"
+                    class="w-full h-full object-cover object-center" />
+            </div>
+        </div>
+    </section>
+
+    <!-- Profil -->
+    <section id="profil" class="py-16 bg-white" data-aos="fade-up">
+        <div class="container max-w-screen-xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-lime-700 mb-10">Profil Desa</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start text-gray-700">
+
+                <!-- Gambar Kantor Desa (Kiri) -->
+                <div class="flex justify-center">
+                    <img id="office-image" src="https://placehold.co/600x400/EEE/777?text=Kantor+Desa"
+                        alt="Foto Kantor Desa" class="rounded-lg shadow-md w-full max-w-md object-cover" />
+                </div>
+
+                <!-- Konten Teks Profil (Kanan) -->
+                <div id="profil-text" class="space-y-4 text-left">
+                    <p class="italic text-gray-400">Memuat data profil desa...</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Aparatur -->
+    <section id="aparatur" class="py-20 bg-gradient-to-b from-white via-lime-50 to-white" data-aos="fade-up">
+        <div class="container max-w-screen-xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-extrabold text-lime-700 mb-3 tracking-tight">Aparatur Desa</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg">
+                    Tim aparatur yang berperan aktif dalam mengelola pemerintahan Desa Balewangi secara transparan dan
+                    berintegritas.
+                </p>
+            </div>
+            <div id="aparatur-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8"></div>
+        </div>
+    </section>
+
+    <!-- Berita -->
+    <section id="berita" class="py-16 bg-white" data-aos="fade-up">
+        <div class="container max-w-screen-xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-lime-700 mb-10">Berita Desa</h2>
+            <div id="berita-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <p class="italic text-gray-400 col-span-full text-center">Memuat berita terbaru...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- UMKM -->
+    <section id="umkm" class="py-16 bg-white" data-aos="fade-up">
+        <div class="container max-w-screen-xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-lime-700 mb-10">UMKM Desa</h2>
+            <div id="umkm-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <p class="italic text-gray-400 col-span-full text-center">Memuat data UMKM...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeri -->
+    <section id="galeri" class="py-16 bg-lime-50" data-aos="fade-up">
+        <div class="container max-w-screen-xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-lime-700 mb-10">Galeri Kegiatan</h2>
+            <div id="galeri-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <p class="italic text-gray-400 col-span-full text-center">Memuat galeri kegiatan...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="kontak" class="bg-lime-600 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+                <!-- Info Desa -->
+                <div>
+                    <h3 id="footer-village-name" class="text-2xl font-bold mb-3">Desa Balewangi</h3>
+                    <p id="footer-description" class="text-sm text-lime-100 leading-relaxed"></p>
+                    <div class="flex space-x-4 mt-4 text-lg">
+                        <a href="#" class="hover:text-white/80"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="hover:text-white/80"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="hover:text-white/80"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="hover:text-white/80"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <!-- Navigasi -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-3">Navigasi</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#hero" class="hover:underline">Beranda</a></li>
+                        <li><a href="#profil" class="hover:underline">Profil Desa</a></li>
+                        <li><a href="#aparatur" class="hover:underline">Aparatur</a></li>
+                        <li><a href="#berita" class="hover:underline">Berita</a></li>
+                        <li><a href="#umkm" class="hover:underline">UMKM</a></li>
+                        <li><a href="#galeri" class="hover:underline">Kegiatan</a></li>
+                    </ul>
+                </div>
+                <!-- Kontak -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-3">Hubungi Kami</h3>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex items-start gap-3">
+                            <i class="fas fa-map-marker-alt mt-1"></i>
+                            <span id="footer-village-address">-</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fas fa-phone-alt mt-1"></i>
+                            <span id="footer-village-phone">+62 812-3456-7890</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fas fa-envelope mt-1"></i>
+                            <span id="footer-village-email">https://desa-balewangi.lskk.co.id/</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-10 border-t border-white/30 pt-4 text-center text-sm">
+                <p>&copy; <span id="current-year"></span> <span id="footer-copyright-name">Desa Balewangi</span>. All
+                    Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS Library -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        document.getElementById("current-year").textContent = new Date().getFullYear();
+        AOS.init({ duration: 800, once: true });
+
+        const API_BASE_URL = "https://api-kawal-desa.lskk.co.id";
+        const IMAGE_BASE_URL = "https://bucket-2.nos.wjv-1.neo.id/";
+        const guid = new URLSearchParams(window.location.search).get("guid") || "22d302f7-7058-462a-ad7e-f666ef01b6db";
+
+        const fetchWithCache = async (endpoint) => {
+            const cacheKey = `desa-data-${guid}-${endpoint}`;
+            const cached = sessionStorage.getItem(cacheKey);
+            if (cached) return JSON.parse(cached);
+
+            try {
+                const res = await fetch(`${API_BASE_URL}${endpoint}`);
+                const data = await res.json();
+                sessionStorage.setItem(cacheKey, JSON.stringify(data));
+                return data;
+            } catch (err) {
+                console.error("Fetch error:", err);
+                return null;
+            }
+        };
+
+        // Navbar scroll effect
+        document.getElementById("menu-toggle").addEventListener("click", () => {
+            document.getElementById("mobile-menu").classList.toggle("hidden");
+        });
+
+        window.addEventListener("scroll", () => {
+            const navbar = document.getElementById("navbar");
+            if (window.scrollY > 20) {
+                navbar.classList.remove("bg-white/70");
+                navbar.classList.add("bg-white", "shadow-md");
+            } else {
+                navbar.classList.add("bg-white/70");
+                navbar.classList.remove("bg-white", "shadow-md");
+            }
+        });
+
+        // ====================
+        // Hero + Profil Desa + Logo
+        // ====================
+        fetchWithCache(`/api/village/profile?guid=${guid}`).then(data => {
+            const village = data?.vaillage;
+            const heroImg = document.getElementById("hero-img");
+            const heroTitle = document.getElementById("hero-title");
+            const profilText = document.getElementById("profil-text");
+            const officeImg = document.getElementById("office-image");
+            const logoImg = document.getElementById("village-logo"); // Logo element
+
+            if (village?.banner) heroImg.src = IMAGE_BASE_URL + village.banner;
+            if (village?.name) {
+                heroTitle.innerHTML = `Selamat Datang di <span class="text-lime-700">${village.name}</span>`;
+            }
+
+            // Tambah logo desa
+            if (logoImg && village.logo) {
+                logoImg.src = IMAGE_BASE_URL + village.logo;
+                logoImg.alt = `Logo Desa ${village.name}`;
+            }
+
+            const alamatLengkap = [
+                village.address,
+                village.hamlet,
+                village.rt ? `RT ${village.rt}` : null,
+                village.rw ? `RW ${village.rw}` : null,
+                village.subdistrict,
+                village.district,
+                village.province,
+            ].filter(Boolean).join(", ");
+
+            profilText.innerHTML = `
+            ${village.description ? `<p>${village.description}</p>` : ""}
+            <ul class="space-y-1 text-gray-700">
+                <li><strong>Alamat:</strong> ${alamatLengkap || "-"}</li>
+                <li><strong>Email:</strong> ${village.email || "-"}</li>
+                <li><strong>Website:</strong> ${village.url ? `<a href="${village.url}" class="text-lime-700 hover:underline" target="_blank">${village.url}</a>` : "-"}</li>
+                <li><strong>Kecamatan:</strong> ${village.subdistrict || "-"}</li>
+                <li><strong>Kabupaten:</strong> ${village.district || "-"}</li>
+            </ul>
+        `;
+
+            if (village.office) {
+                officeImg.src = IMAGE_BASE_URL + village.office;
+                officeImg.alt = `Kantor Desa ${village.name}`;
+            }
+
+            // Footer
+            document.getElementById("footer-village-name").textContent = village.name || "Desa";
+            document.getElementById("footer-village-address").textContent = village.address || "-";
+            document.getElementById("footer-village-email").textContent = village.email || "-";
+            document.getElementById("footer-description").textContent = village.description || "-";
+            document.getElementById("footer-copyright-name").textContent = village.name || "Desa";
+        });
+
+        // ====================
+        // Aparatur Desa
+        // ====================
+        fetchWithCache(`/api/village/profile?guid=${guid}`).then(data => {
+            const struktur = data?.vaillage?.organizationalStructure || [];
+            const container = document.getElementById("aparatur-list");
+
+            if (!container) return;
+
+            if (struktur.length === 0) {
+                container.innerHTML = `<p class="text-gray-500 italic col-span-full text-center">Data aparatur desa tidak tersedia.</p>`;
+                return;
+            }
+
+            container.innerHTML = struktur.map(item => {
+                const img = item.file ? `${IMAGE_BASE_URL}${item.file}` : "https://placehold.co/400x500/EEE/777?text=Foto";
+                return `
+                <div class="group bg-white rounded-2xl shadow-lg border border-lime-100 overflow-hidden hover:shadow-xl transition-all duration-300">
+                    <div class="overflow-hidden relative aspect-[3/4] bg-gray-100">
+                        <img src="${img}" alt="${item.name || 'Aparatur Desa'}" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-300" />
+                    </div>
+                    <div class="p-5 text-center">
+                        <h4 class="text-lg font-bold text-gray-800">${item.name || '-'}</h4>
+                        <p class="text-sm font-medium text-lime-600 tracking-wide">${item.position || '-'}</p>
+                    </div>
+                </div>
+            `;
+            }).join('');
+        });
+
+        // ====================
+        // Berita Desa
+        // ====================
+        fetchWithCache(`/api/report/village?guid=${guid}&page=1&limit=3&type=news`).then(data => {
+            const list = data?.data || [];
+            const beritaEl = document.getElementById("berita-list");
+
+            if (list.length === 0) {
+                beritaEl.innerHTML = `<p class="text-gray-500 italic col-span-full text-center">Belum ada berita desa saat ini.</p>`;
+                return;
+            }
+
+            beritaEl.innerHTML = list.map(item => {
+                const img = item.file ? `${IMAGE_BASE_URL}${item.file}` : "https://placehold.co/600x400/EEE/777?text=Gambar";
+                const tgl = new Date(item.createAt).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+
+                return `
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition" data-aos="fade-up">
+                    <img src="${img}" class="w-full h-48 object-cover object-center" alt="${item.name}">
+                    <div class="p-4">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-2">${item.name}</h4>
+                        <p class="text-sm text-gray-500 mb-2">${tgl}</p>
+                        <a href="#" class="text-lime-600 font-medium text-sm hover:underline">Selengkapnya</a>
+                    </div>
+                </div>
+            `;
+            }).join('');
+        });
+
+        // ====================
+        // UMKM
+        // ====================
+        fetchWithCache(`/api/umkm/village?guid=${guid}&page=1&limit=6`).then(data => {
+            const list = data?.data || [];
+            const container = document.getElementById("umkm-list");
+
+            if (!container) return;
+
+            if (list.length === 0) {
+                container.innerHTML = `<p class="italic text-gray-400 col-span-full text-center">Belum ada data UMKM tersedia.</p>`;
+                return;
+            }
+
+            container.innerHTML = list.map(item => {
+                const img = item.file ? `${IMAGE_BASE_URL}${item.file}` : "https://placehold.co/600x400/EEE/777?text=UMKM";
+                return `
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition" data-aos="fade-up">
+                    <img src="${img}" class="w-full h-48 object-cover object-center" alt="${item.name}">
+                    <div class="p-4">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-2">${item.name}</h4>
+                        <p class="text-sm text-gray-600">${item.description || "Tidak ada deskripsi."}</p>
+                    </div>
+                </div>
+            `;
+            }).join('');
+        });
+
+        // ====================
+        // Galeri
+        // ====================
+        fetchWithCache(`/api/report/village?guid=${guid}&page=1&limit=6&type=gallery`).then(data => {
+            if (!data?.data?.length) {
+                return fetchWithCache(`/api/report/village?guid=${guid}&page=1&limit=6&type=activity`);
+            }
+            return data;
+        }).then(data => {
+            const list = data?.data || [];
+            const container = document.getElementById("galeri-list");
+
+            if (!container) return;
+
+            if (list.length === 0) {
+                container.innerHTML = `<p class="italic text-gray-400 col-span-full text-center">Belum ada galeri kegiatan tersedia.</p>`;
+                return;
+            }
+
+            container.innerHTML = list.map(item => {
+                const img = item.file ? `${IMAGE_BASE_URL}${item.file}` : "https://placehold.co/600x400/EEE/777?text=Galeri";
+                return `
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition" data-aos="fade-up">
+                    <img src="${img}" class="w-full h-48 object-cover object-center" alt="${item.name}">
+                    <div class="p-4">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-2">${item.name}</h4>
+                        <p class="text-sm text-gray-600">${item.description || "Tidak ada deskripsi."}</p>
+                    </div>
+                </div>
+            `;
+            }).join('');
+        });
+    </script>
+
+</body>
+
+</html>
